@@ -1,0 +1,24 @@
+Things to get done tonight (2/29):
+-Clicking on a tower/enemy will open up a small menu (Done)
+   -Can let the player delete the tower gives some money back (Done)
+-Connect selling the tower to the Wallet (Done)
+
+
+Things to get done (3/1):
+-Add waves to the wavesobject
+-fix the next wave button spawning the shop
+
+Things to get done (3/2):
+-continue fixing the button & shop issue (Talking to Corbin about it)
+-Instansiate enemies and make them move towards the goal (Done)
+
+Things to get done (3/3):
+-make the enemies find the locators and move towards it
+-create specific AI for each of the enemies
+    -sprint (Done)
+    -heavy
+    -flying (Done)
+    -exploder (Done)
+
+
+WAVE 1 has only 20 Sprinters.

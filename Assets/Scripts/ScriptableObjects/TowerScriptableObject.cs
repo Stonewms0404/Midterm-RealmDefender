@@ -5,13 +5,14 @@ public class TowerScriptableObject : ScriptableObject
 {
     public enum TowerType
     {
-        Snowman,
-        Nymph,
+        Slime,
+        Knight,
         Archer,
-        Ninja,
+        Cleric,
         Wizard
     }
     public TowerType towerType;
     public int costOfTower, health, useAmount;
-    public float useSpeed;
+    public float useSpeed, sightRange;
+    public GameObject deathParticles;
 }

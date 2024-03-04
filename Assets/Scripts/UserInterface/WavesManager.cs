@@ -30,7 +30,7 @@ public class WavesManager : MonoBehaviour
 
     private EnemyFolder folderOfEnemies;
     private bool canWaveSpawn = false, canSpawnEnemy = false, hasEnemiesLeft, isWaveStarting, isWaveEnding;
-    private float enemySpawnTimer = 0, waveMultiplier = 1.0f, waveTimer;
+    private float enemySpawnTimer = 0, waveTimer;
     private int waves = 0;
     private int[] enemyCount = new int[4];
 
@@ -39,11 +39,6 @@ public class WavesManager : MonoBehaviour
     {
         folderOfEnemies = enemyFolder.GetComponent<EnemyFolder>();
         NextWaveButton.NextWaveButtonClicked += AddWave;
-    }
-
-    public int GetAmountOfSpawners()
-    {
-        return amountOfSpawners;
     }
 
     void FixedUpdate()
@@ -64,11 +59,6 @@ public class WavesManager : MonoBehaviour
         }
         if (canWaveSpawn)
         {
-            if (waves > 0)
-            {
-                SetHasEnemiesLeft();
-            }
-
             if (!canSpawnEnemy)
             {
                 if (enemySpawnTimer <= enemySpawnTimeToReach)
@@ -79,28 +69,16 @@ public class WavesManager : MonoBehaviour
                     enemySpawnTimer = 0.0f;
                 }
             }
-            if (canSpawnEnemy)
+            if (canSpawnEnemy && hasEnemiesLeft)
             {
                 SpawnEnemy();
+                SetHasEnemiesLeft();
             }
             if (!hasEnemiesLeft && folderOfEnemies.HasChildren)
             {
                 EndWave();
             }
         }
-    }
-
-    public Vector2 GetEnemyLocator()
-    {
-        int randNum = UnityEngine.Random.Range(0, enemyLocator.Length);
-        for (int i = 0; i < enemyLocator.Length; i++)
-        {
-            if (enemyLocator[i].GetLocatorNum() == randNum)
-            {
-                selectedEnemyLocator = (Vector2)enemyLocator[i].gameObject.transform.position;
-            }
-        }
-        return selectedEnemyLocator;
     }
 
     private void SetHasEnemiesLeft()
@@ -140,10 +118,6 @@ public class WavesManager : MonoBehaviour
     private void AddWave()
     {
         ++waves;
-        if (waves == 1)
-            waveMultiplier = 1;
-        else if (waves >= 1)
-            waveMultiplier += 0.5f;
         canSpawnEnemy = true;
         enemySpawnTimeToReach = WaveConfig[waves - 1].spawnTimer;
         enemyCount[0] = WaveConfig[waves - 1].sprint;
@@ -151,6 +125,7 @@ public class WavesManager : MonoBehaviour
         enemyCount[2] = WaveConfig[waves - 1].flying;
         enemyCount[3] = WaveConfig[waves - 1].exploding;
         isWaveStarting = true;
+        SetHasEnemiesLeft();
     }
 
     private void EndWave()

@@ -17,6 +17,5 @@ public class EnemyScriptableObject : ScriptableObject
     public int health, attack, speed, moneyReward;
     public bool canCollideWithTowers;
     public EnemyType enemyType;
-
-
+    public GameObject deathParticles;
 }

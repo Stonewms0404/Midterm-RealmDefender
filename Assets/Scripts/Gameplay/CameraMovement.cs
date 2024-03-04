@@ -10,27 +10,25 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private GameObject moveObject;
     [SerializeField]
-    private Camera cameraScript;
-    [SerializeField]
     private Rigidbody2D rb;
 
     private float cameraZoom;
 
+    public Camera cameraScript;
+
     // Update is called once per frame
     void Update()
     {
-        //Optional Zoom
-        /*
         //Get Inputs
         cameraZoom = Input.GetAxis("Mouse ScrollWheel");
 
         //Configure camera zoom
         cameraZoom *= zoomSpeed;
-        cameraScript.fieldOfView = Mathf.Clamp(Mathf.Lerp(
-            cameraScript.fieldOfView,
-            cameraScript.fieldOfView - cameraZoom, zoomScrubbing),
+        cameraScript.orthographicSize = Mathf.Clamp(Mathf.Lerp(
+            cameraScript.orthographicSize,
+            cameraScript.orthographicSize - cameraZoom, zoomScrubbing),
             zoomMin, zoomMax);
-        */
+        
 
         //Move Camera to Object
         Vector3 cameraMovement = Vector3.Lerp(
@@ -39,15 +37,5 @@ public class CameraMovement : MonoBehaviour
             moveScrubbing);
 
         transform.position = cameraMovement;
-    }
-
-    public float GetZoomMin()
-    {
-        return zoomMin;
-    }
-
-    public float GetZoomMax()
-    {
-        return zoomMax;
     }
 }

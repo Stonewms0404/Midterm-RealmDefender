@@ -9,13 +9,10 @@ public class SelectedTile : MonoBehaviour
 {
     public static event Action<string, Transform> _DisplayShop;
 
-
-    [SerializeField] private Canvas UserInterface;
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject moveObject;
     [SerializeField] private Vector3 offset;
 
-    private string[] hoveredItem;
+    //private string[] hoveredItem;
     [SerializeField] private bool isShopOpen, canOpenShop = true;
 
     private void OnEnable()
@@ -35,17 +32,10 @@ public class SelectedTile : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Input.GetMouseButtonDown(1) && isShopOpen)
-        {
-            isShopOpen = false;
-            _DisplayShop("Hide", transform);
-        }
+        DisplayShopAtLocation();
         if (!isShopOpen && canOpenShop)
         {
-            DisplayShopAtLocation();
             Vector3 mouse = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 moveObjectPos = moveObject.transform.position;
-            mouse += moveObjectPos;
             mouse.z = 0;
             transform.position = mouse + offset;
         }
@@ -53,7 +43,12 @@ public class SelectedTile : MonoBehaviour
 
     private void DisplayShopAtLocation()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
+        {
+            isShopOpen = false;
+            _DisplayShop("Hide", transform);
+        }
+        if (Input.GetMouseButtonDown(0) && !isShopOpen && canOpenShop)
         {
             _DisplayShop("Show", transform);
         }
@@ -64,6 +59,7 @@ public class SelectedTile : MonoBehaviour
         isShopOpen = value;
     }
 
+    /*
     private void ItemsHovered(string itemHovered)
     {
         //Saving a possible instance of a repeated item.
@@ -79,19 +75,19 @@ public class SelectedTile : MonoBehaviour
                 break;
             }
         }
-        /*
-         * If the possibleIndex value is still -1,
-         * No item was found, and the item can be saved.
-         */
+
+         // If the possibleIndex value is still -1,
+         // No item was found, and the item can be saved.
+
         if (possibleIndex == -1)
         {
             hoveredItem[hoveredItem.Length] = itemHovered;
         }
-        /*
-         * If the possibleIndex is anything but -1,
-         * It loops through starting at the possibleIndex,
-         * And adjusts the array by removing the instance.
-         */
+        
+         // If the possibleIndex is anything but -1,
+         // It loops through starting at the possibleIndex,
+         // And adjusts the array by removing the instance.
+
         else
         {
             for (int i = possibleIndex; i < hoveredItem.Length - 1; i++)
@@ -100,5 +96,6 @@ public class SelectedTile : MonoBehaviour
             }
         }
     }
+        */
 
 }

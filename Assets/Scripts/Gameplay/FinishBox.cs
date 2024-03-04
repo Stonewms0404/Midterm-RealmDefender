@@ -8,7 +8,7 @@ public class FinishBox : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().Death();
+            Destroy(collision.gameObject);
         }
     }
 }

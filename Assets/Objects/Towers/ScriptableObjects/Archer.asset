@@ -17,3 +17,4 @@ MonoBehaviour:
   health: 50
   useAmount: 30
   useSpeed: 1
+  deathParticles: {fileID: 8985519470620673580, guid: b675c9b4977d1a246a9e6025aab7f0cb, type: 3}

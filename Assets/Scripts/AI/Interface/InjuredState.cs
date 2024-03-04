@@ -6,7 +6,7 @@ public class InjuredState : IState
 {
     public void UpdateState(_StateController controller)
     {
-
+        
     }
 
     public void OnEnter(_StateController controller)

@@ -7,11 +7,12 @@ using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
-    public static event Action<int> UpdateWallet;
     [SerializeField]
     private TextMeshProUGUI walletText;
     [SerializeField]
     private int startingAmount;
+    [SerializeField]
+    private SpawnTowerUI spawnTowerUI;
 
     private int wallet;
 
@@ -25,17 +26,22 @@ public class Wallet : MonoBehaviour
         AddToWallet(startingAmount);
     }
 
+    public int GetWallet()
+    {
+        return wallet;
+    }
+
     private void AddToWallet(int amount)
     {
         wallet += amount;
         UpdateWalletText();
-        UpdateWallet(wallet);
+        spawnTowerUI.UpdateButtons(wallet);
     }
     private void Transation(int amount)
     {
         wallet -= amount;
         UpdateWalletText();
-        UpdateWallet(wallet);
+        spawnTowerUI.UpdateButtons(wallet);
     }
 
     private void UpdateWalletText()

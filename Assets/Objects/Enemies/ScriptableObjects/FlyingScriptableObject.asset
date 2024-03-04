@@ -15,7 +15,8 @@ MonoBehaviour:
   EnemyName: Flying
   health: 20
   attack: 10
-  speed: 10
+  speed: 7
   moneyReward: 10
   canCollideWithTowers: 0
   enemyType: 2
+  deathParticles: {fileID: 1207696547463116773, guid: ae56d3b47c136d941b187c63f31a51a1, type: 3}

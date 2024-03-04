@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: 4
   costOfTower: 500
-  health: 100
+  health: 120
   useAmount: 50
   useSpeed: 1.5
+  deathParticles: {fileID: 311577449298023507, guid: df03ef19fb576d04bb06ec7e7e448282, type: 3}

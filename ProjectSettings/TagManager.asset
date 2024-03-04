@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - TowerSelected
   - EnemyLocator
+  - Projectile
+  - TowerSpawner
+  - EnemyFolder
   layers:
   - Default
   - TransparentFX
@@ -46,6 +49,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1304531335
+    locked: 0
+  - name: Towers & Enemies
+    uniqueID: 3344453153
     locked: 0
   - name: TowerUI
     uniqueID: 552727223

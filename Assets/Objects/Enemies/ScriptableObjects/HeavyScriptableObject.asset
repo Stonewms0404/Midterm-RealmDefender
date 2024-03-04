@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: Heavy
   health: 80
-  attack: 30
+  attack: 20
   speed: 5
   moneyReward: 50
   canCollideWithTowers: 1
   enemyType: 1
+  deathParticles: {fileID: 2449368243447855634, guid: 6af0561912c58a945bda8f755bc785df, type: 3}

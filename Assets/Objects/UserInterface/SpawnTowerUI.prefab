@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9163713083706688926}
   - component: {fileID: 4537151137283261901}
   m_Layer: 0
-  m_Name: NymphSprite
+  m_Name: ClericSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552727223
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -1774395807, guid: 2cb70c5e8e705f748a5e6139d3ddac42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -302,7 +302,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552727223
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 608334445617462620}
   - component: {fileID: 8139947762122112181}
   m_Layer: 0
-  m_Name: NinjaSprite
+  m_Name: SlimeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +386,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552727223
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 1764976972, guid: 2cb70c5e8e705f748a5e6139d3ddac42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -547,9 +547,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a74302a088a31b43a701912c5f0fabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costOfTower: 300
+  towerSO: {fileID: 11400000, guid: fd6fb7aa2f12f2644a6a2d12871e7e51, type: 2}
   buttonText: {fileID: 6763374461809683571}
   towerObject: {fileID: 569828570721792074, guid: ddd41e21dc4605f46a92147c664ae719, type: 3}
+  shopOpen: 0
+  isDead: 0
 --- !u!1 &4132029045697350407
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +566,7 @@ GameObject:
   - component: {fileID: 4955323921088375844}
   - component: {fileID: 2996201368410587980}
   m_Layer: 5
-  m_Name: NinjaButton
+  m_Name: SlimeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -585,7 +587,7 @@ RectTransform:
   - {fileID: 3613668305451124865}
   - {fileID: 608334445617462620}
   m_Father: {fileID: 6673694489029910702}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -698,9 +700,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a74302a088a31b43a701912c5f0fabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costOfTower: 350
+  towerSO: {fileID: 11400000, guid: be3c10bd6666424438b9241e6535b8ef, type: 2}
   buttonText: {fileID: 7777177855593308017}
   towerObject: {fileID: 877240067684661973, guid: 614d1cf744edd6c428aa49af98cd8496, type: 3}
+  shopOpen: 0
+  isDead: 0
 --- !u!1 &4336336156196819872
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +716,7 @@ GameObject:
   - component: {fileID: 1235856340666248873}
   - component: {fileID: 1205434055712999431}
   m_Layer: 0
-  m_Name: SnowmanSprite
+  m_Name: KnightSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,7 +776,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552727223
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 667208199, guid: 2cb70c5e8e705f748a5e6139d3ddac42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -862,7 +866,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552727223
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1169,6 +1173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6673694488015601204}
   - component: {fileID: 6216461198862047961}
+  - component: {fileID: 1421170723}
   m_Layer: 0
   m_Name: SpawnTowerUI
   m_TagString: Untagged
@@ -1219,8 +1224,35 @@ MonoBehaviour:
   - {fileID: 2564090103892843438}
   - {fileID: 1414409937350356958}
   mainCamera: {fileID: 0}
-  wallet: 0
+  wallet: {fileID: 0}
   canShow: 1
+  offset: {x: 0, y: -1.1, z: 0}
+--- !u!61 &1421170723
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6673694488015601207}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.2}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12, y: 6}
+  m_EdgeRadius: 0
 --- !u!1 &6673694488474748782
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,9 +1543,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a74302a088a31b43a701912c5f0fabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costOfTower: 500
+  towerSO: {fileID: 11400000, guid: d198e8f781449a341afbc77378720507, type: 2}
   buttonText: {fileID: 6673694488474748780}
   towerObject: {fileID: 6728374249316632169, guid: 5c74788232230c7459d4b9c87f0ccbfe, type: 3}
+  shopOpen: 0
+  isDead: 0
 --- !u!1 &6673694489029910673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,10 +1581,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6673694488648282142}
-  - {fileID: 5297368177044428186}
-  - {fileID: 3113324047165600872}
   - {fileID: 2333189665920211037}
+  - {fileID: 3113324047165600872}
   - {fileID: 254447289455104071}
+  - {fileID: 5297368177044428186}
   m_Father: {fileID: 6673694488015601204}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1576,6 +1610,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 552727223
   m_SortingOrder: 0
@@ -1717,7 +1752,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552727223
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -659476361, guid: 2cb70c5e8e705f748a5e6139d3ddac42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1744,7 +1779,7 @@ GameObject:
   - component: {fileID: 2564090103892843438}
   - component: {fileID: 6279093380683695851}
   m_Layer: 5
-  m_Name: NymphButton
+  m_Name: ClericButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1765,7 +1800,7 @@ RectTransform:
   - {fileID: 6323817870274669156}
   - {fileID: 9163713083706688926}
   m_Father: {fileID: 6673694489029910702}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1878,9 +1913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a74302a088a31b43a701912c5f0fabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costOfTower: 200
+  towerSO: {fileID: 11400000, guid: 4a0fbb76882e58a41ad987a933184be5, type: 2}
   buttonText: {fileID: 6357082244047850487}
   towerObject: {fileID: 7899537023813009065, guid: cc80105368d658045bcf37261d64e155, type: 3}
+  shopOpen: 0
+  isDead: 0
 --- !u!1 &7754655307124564829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,7 +1989,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552727223
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -1181402693, guid: 2cb70c5e8e705f748a5e6139d3ddac42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2121,7 +2158,7 @@ GameObject:
   - component: {fileID: 1414409937350356958}
   - component: {fileID: 3989579378379602678}
   m_Layer: 5
-  m_Name: SnowmanButton
+  m_Name: KnightButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2142,7 +2179,7 @@ RectTransform:
   - {fileID: 6155026791877901101}
   - {fileID: 1235856340666248873}
   m_Father: {fileID: 6673694489029910702}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2255,6 +2292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a74302a088a31b43a701912c5f0fabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costOfTower: 100
+  towerSO: {fileID: 11400000, guid: 970adbb81fe863f4aa24fcc62637ef61, type: 2}
   buttonText: {fileID: 4999427326339137208}
   towerObject: {fileID: 2052339572290872391, guid: e9d7ca04492e0f14893c778f0222229d, type: 3}
+  shopOpen: 0
+  isDead: 0

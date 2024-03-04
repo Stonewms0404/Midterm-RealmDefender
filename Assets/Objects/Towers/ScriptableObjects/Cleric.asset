@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d17fcb82bbafaf241ab3ae6c59557d17, type: 3}
-  m_Name: Nymph
+  m_Name: Cleric
   m_EditorClassIdentifier: 
-  towerType: 1
-  costOfTower: 250
-  health: 30
-  useAmount: 10
-  useSpeed: 10
+  towerType: 3
+  costOfTower: 350
+  health: 40
+  useAmount: 20
+  useSpeed: 3
+  deathParticles: {fileID: 8750396060761876457, guid: 4d6b43bccbf3fa04bb3d636a6e3296b3, type: 3}

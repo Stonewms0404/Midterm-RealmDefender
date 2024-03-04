@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d17fcb82bbafaf241ab3ae6c59557d17, type: 3}
-  m_Name: Ninja
+  m_Name: Slime
   m_EditorClassIdentifier: 
   towerType: 0
-  costOfTower: 350
-  health: 65
-  useAmount: 20
+  costOfTower: 100
+  health: 10
+  useAmount: 1
   useSpeed: 0.2
+  deathParticles: {fileID: 8760233000761127867, guid: d75ef8208d833cf429588409bc0c74d0, type: 3}

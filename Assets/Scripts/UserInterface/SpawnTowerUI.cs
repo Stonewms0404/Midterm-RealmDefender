@@ -20,7 +20,7 @@ public class SpawnTowerUI : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
     [SerializeField]
-    private int wallet;
+    private Wallet wallet;
 
     [SerializeField] private bool canShow = true;
     [SerializeField] private Vector3 offset;
@@ -28,9 +28,20 @@ public class SpawnTowerUI : MonoBehaviour
     private void Start()
     {
         SelectedTile._DisplayShop += DisplayShop;
-        Wallet.UpdateWallet += SetWallet;
         Tower._BuyTower += BuyTower;
         ToggleShop(false);
+    }
+
+    private void Update()
+    {
+        if (gameObject.activeSelf)
+        {
+            if (Mathf.Abs(Vector2.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) > 10.0f)
+            {
+                ToggleShop(false);
+            }
+        }
+            
     }
 
     public void DisplayShop(string input, Transform trans)
@@ -53,13 +64,7 @@ public class SpawnTowerUI : MonoBehaviour
         _ShopOpen(value);
     }
 
-    private void SetWallet(int newAmount)
-    {
-        wallet = newAmount;
-        UpdateButtons();
-    }
-
-    private void UpdateButtons()
+    public void UpdateButtons(int wallet)
     {
         for (int i = 0; i < towerButtons.Length; i++) 
         {
@@ -79,17 +84,12 @@ public class SpawnTowerUI : MonoBehaviour
 
     private void BuyTower(int costOfTower, GameObject towerObject)
     {
-        if (costOfTower <= wallet)
+        if (costOfTower <= wallet.GetWallet())
         {
             _Transaction(costOfTower);
             _PlaceTower(towerObject, spawnPosition.transform);
             ToggleShop(false);
         }
-    }
-
-    private void SetCanShow()
-    {
-        ToggleShop(false);
     }
 
     private void OnMouseEnter()
