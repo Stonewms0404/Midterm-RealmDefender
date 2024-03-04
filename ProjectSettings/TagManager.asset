@@ -10,6 +10,8 @@ TagManager:
   - Projectile
   - TowerSpawner
   - EnemyFolder
+  - SettingsManager
+  - LevelLoader
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ public class Tower : MonoBehaviour
     public static event Action<Transform, GameObject> _OpenTowerMenu;
     public static event Action<int> _GotHit;
     public static event Action<GameObject, Vector2> _Death;
+    public static event Action<GameObject, Transform> _ShootProjectile;
 
     [SerializeField] private TowerScriptableObject towerSO;
     [SerializeField] private TextMeshProUGUI buttonText;
@@ -29,6 +30,10 @@ public class Tower : MonoBehaviour
         }
     }
 
+    public void ShootProjectile(Transform trans)
+    {
+        _ShootProjectile(towerSO.projectile, trans);
+    }
     public float GetSightRange()
     {
         return towerSO.sightRange;
@@ -90,6 +95,7 @@ public class Tower : MonoBehaviour
     //When the tower gets destroyed.
     private void OnDestroy()
     {
-        _Death(towerSO.deathParticles, transform.position);
+        if (!buttonText)
+            _Death(towerSO.deathParticles, transform.position);
     }
 }

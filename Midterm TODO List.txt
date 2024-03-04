@@ -16,9 +16,14 @@ Things to get done (3/3):
 -make the enemies find the locators and move towards it
 -create specific AI for each of the enemies
     -sprint (Done)
-    -heavy
+    -heavy (Done)
     -flying (Done)
     -exploder (Done)
 
-
-WAVE 1 has only 20 Sprinters.
+Things to get done (3/4):
+-Tower AI
+    -Slime
+    -Knight
+    -Archer
+    -Cleric
+    -Wizard

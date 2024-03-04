@@ -13,14 +13,17 @@ public class TowerSelectedUI : MonoBehaviour
     public static event Action<int> _SellTower;
 
     [SerializeField]
+    private PauseMenu pauseMenu;
+    [SerializeField]
     private GameObject towerSelectedUI, selectedTowerObj;
-    public TextMeshProUGUI healthText, sellText;
     [SerializeField]
     private Button sellTowerButton;
 
     private Tower selectedTower;
     private bool isOpen = false, towerSold = false;
     private int sellAmount;
+
+    public TextMeshProUGUI healthText, sellText;
 
     private void Start()
     {
@@ -40,7 +43,11 @@ public class TowerSelectedUI : MonoBehaviour
 
     private void Update()
     {
-        if (isOpen)
+        if (pauseMenu.isPaused)
+        {
+            CloseMenu();
+        }
+        else if (isOpen && !pauseMenu.isPaused)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mouseDist = new(MathF.Abs(mousePos.x - transform.position.x), MathF.Abs(mousePos.y - transform.position.y));

@@ -40,17 +40,18 @@ public class ArcherAI : MonoBehaviour
         if (Input.GetAxisRaw("Fire1") != 0 && canShoot)
         {
             Shoot();
+            ResetShooting();
         }
     }
 
-    public Vector2 GetClosestEnemy(Vector2 objPos)
+    public Vector2 GetClosestEnemy()
     {
         return enemy.transform.position;
     }
 
     private void Shoot()
     {
-
+        towerScript.ShootProjectile(transform);
     }
 
     private void ResetShooting()
@@ -58,6 +59,4 @@ public class ArcherAI : MonoBehaviour
         canShoot = false;
         useTimer = 0.0f;
     }
-
-    
 }

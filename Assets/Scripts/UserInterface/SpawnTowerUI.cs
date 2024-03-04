@@ -14,6 +14,8 @@ public class SpawnTowerUI : MonoBehaviour
     public static event Action<bool> _ShopOpen;
 
     [SerializeField]
+    private PauseMenu pauseMenu;
+    [SerializeField]
     private GameObject spawnTowerUI, spawnPosition;
     [SerializeField]
     private UnityEngine.UI.Button[] towerButtons;
@@ -34,7 +36,11 @@ public class SpawnTowerUI : MonoBehaviour
 
     private void Update()
     {
-        if (gameObject.activeSelf)
+        if (pauseMenu.isPaused)
+        {
+            ToggleShop(false);
+        }
+        else if (gameObject.activeSelf && !pauseMenu.isPaused)
         {
             if (Mathf.Abs(Vector2.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) > 10.0f)
             {
@@ -46,7 +52,7 @@ public class SpawnTowerUI : MonoBehaviour
 
     public void DisplayShop(string input, Transform trans)
     {
-        if (input == "Show" && canShow)
+        if (input == "Show" && canShow && !pauseMenu.isPaused)
         {
             spawnTowerUI.transform.position = trans.position + offset;
 

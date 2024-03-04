@@ -12,7 +12,7 @@ public class TowerScriptableObject : ScriptableObject
         Wizard
     }
     public TowerType towerType;
-    public int costOfTower, health, useAmount;
+    public int costOfTower, health;
     public float useSpeed, sightRange;
-    public GameObject deathParticles;
+    public GameObject deathParticles, projectile;
 }
