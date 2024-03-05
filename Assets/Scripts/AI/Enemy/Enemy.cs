@@ -52,13 +52,22 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
         collision.TryGetComponent<Tower>(out Tower temp);
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            Hit(1);
-        }
         if (temp != null && enemySO.enemyType == EnemyScriptableObject.EnemyType.EXPOLODER)
         {
             Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Projectile collProj = collision.gameObject.GetComponent<Projectile>();
+            switch (collProj.GetProjectileType())
+            {
+                case ProjectileScriptableObject.ProjectileType.DAMAGEENEMY:
+                    Hit(collProj.GetUseAmount());
+                    break;
+                case ProjectileScriptableObject.ProjectileType.ENEMYHEAL:
+                    Hit(-collProj.GetUseAmount());
+                    break;
+            }
         }
 
     }
@@ -66,6 +75,7 @@ public class Enemy : MonoBehaviour
     public void Hit(int amount)
     {
         health -= amount;
+        health = Math.Clamp(health, 0, enemySO.health);
         if (health <= 0)
         {
             RewardMoney(enemySO.moneyReward);

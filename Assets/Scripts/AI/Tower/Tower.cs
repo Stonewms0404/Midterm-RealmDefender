@@ -58,6 +58,7 @@ public class Tower : MonoBehaviour
     public void Hit(int amount)
     {
         health -= amount;
+        health = Math.Clamp(health, 0, towerSO.health);
         if (health <= 0)
         {
             Destroy(this.gameObject);
@@ -80,6 +81,19 @@ public class Tower : MonoBehaviour
         {
             Enemy collidedEnemy = collision.gameObject.GetComponent<Enemy>();
             Hit(collidedEnemy.GetAttack());
+        }
+        else if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Projectile collProj = collision.gameObject.GetComponent<Projectile>();
+            switch (collProj.GetProjectileType())
+            {
+                case ProjectileScriptableObject.ProjectileType.DAMAGETOWER:
+                    Hit(collProj.GetUseAmount());
+                    break;
+                case ProjectileScriptableObject.ProjectileType.TOWERHEAL:
+                    Hit(-collProj.GetUseAmount());
+                    break;
+            }
         }
     }
 

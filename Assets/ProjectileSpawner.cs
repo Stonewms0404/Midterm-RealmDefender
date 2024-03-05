@@ -9,6 +9,10 @@ public class ProjectileSpawner : MonoBehaviour
     {
         Tower._ShootProjectile += SpawnProjectile;
     }
+    private void OnDisable()
+    {
+        Tower._ShootProjectile -= SpawnProjectile;
+    }
 
     private void SpawnProjectile(GameObject projectile, Transform trans)
     {

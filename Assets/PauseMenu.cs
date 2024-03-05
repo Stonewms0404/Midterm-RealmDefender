@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private LevelLoader levelLoader;
     [SerializeField]
-    private SettingsManager settingsManager;
+    private SettingsScriptableObject settingsSO;
 
     public bool isPaused;
 
@@ -53,7 +53,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        levelLoader.GoToScene(settingsManager.GetSceneIndex());
+        levelLoader.GoToScene(settingsSO.sceneIndex);
     }
 
     public void LoadMenu()

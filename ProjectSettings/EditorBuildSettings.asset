@@ -9,7 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 528bfc5d634c9e94e886cde5c45e5d8f
   - enabled: 1
-    path: Assets/Scenes/ForestScene.unity
+    path: Assets/Scenes/ForestLevel.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/BeachLevel.unity
+    guid: d8c2e25cfac44a0499dec3604b44562c
+  - enabled: 1
+    path: Assets/Scenes/CaveLevel.unity
+    guid: 2836de6936ed82b4397aa408b6c0cff0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 387da70c1feeab2479d18cab3df32e6d, type: 2}

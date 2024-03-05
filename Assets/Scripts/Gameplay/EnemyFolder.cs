@@ -17,9 +17,9 @@ public class EnemyFolder : MonoBehaviour
     {
         Enemy[] enemies = GetEnemies();
         if (enemies.Length == 0)
-        {
             return null;
-        }
+        else if (enemies.Length == 1)
+            return enemies[0].gameObject;
 
         GameObject closestObject = enemies[0].gameObject;
         float closestDistance = range;
@@ -40,6 +40,29 @@ public class EnemyFolder : MonoBehaviour
         {
             return closestObject;
         }
+    }
+
+    public GameObject GetClosestEnemy(Vector2 pos)
+    {
+        Enemy[] enemies = GetEnemies();
+        if (enemies.Length == 0)
+            return null;
+        else if (enemies.Length == 1)
+            return enemies[0].gameObject;
+
+        GameObject obj = enemies[0].gameObject;
+        float currentdist = GetAbsDistance(obj.transform.position, pos);
+        for (int i = 1; i < enemies.Length; i++)
+        {
+            float dist = GetAbsDistance(obj.transform.position, enemies[i].gameObject.transform.position);
+            if (dist <= currentdist)
+            {
+                currentdist = dist;
+                obj = enemies[i].gameObject;
+            }
+        }
+
+        return obj;
     }
 
     public Enemy[] GetEnemies()

@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    private SettingsManager settingsManager;
-
-    private void Start()
-    {
-        settingsManager = GameObject.FindGameObjectWithTag("SettingsManager").GetComponent<SettingsManager>();
-    }
+    [SerializeField]
+    private SettingsScriptableObject settingsSO;
 
     private void OnEnable()
     {
         Tower._Death += SpawnParticles;
         Enemy._Death += SpawnParticles;
+        Projectile._SpawnParticles += SpawnParticles;
     }
     private void OnDisable()
     {
         Tower._Death -= SpawnParticles;
         Enemy._Death -= SpawnParticles;
+        Projectile._SpawnParticles -= SpawnParticles;
     }
 
     private void SpawnParticles(GameObject particles, Vector2 objPos)
     {
-        if (settingsManager.GetParticles())
+        if (settingsSO.particles)
         {
             GameObject particle = Instantiate(particles, objPos, Quaternion.identity, transform);
             Destroy(particle, 3);

@@ -7,10 +7,12 @@ public class ProjectileScriptableObject : ScriptableObject
     {
         TOWERHEAL,
         ENEMYHEAL,
-        DAMAGE
+        DAMAGETOWER,
+        DAMAGEENEMY
     }
 
     public ProjectileType projType;
     public int useAmount;
-    public float speed;
+    public float speed, lifetime;
+    public GameObject particles;
 }

@@ -9,7 +9,7 @@ public class SettingsManager : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        gameObject.SetActive(true);
     }
 
     public int GetSceneIndex()
