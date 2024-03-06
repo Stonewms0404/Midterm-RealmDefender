@@ -85,14 +85,19 @@ public class Tower : MonoBehaviour
         else if (collision.gameObject.CompareTag("Projectile"))
         {
             Projectile collProj = collision.gameObject.GetComponent<Projectile>();
-            switch (collProj.GetProjectileType())
+            if (collProj.canHit)
             {
-                case ProjectileScriptableObject.ProjectileType.DAMAGETOWER:
-                    Hit(collProj.GetUseAmount());
-                    break;
-                case ProjectileScriptableObject.ProjectileType.TOWERHEAL:
-                    Hit(-collProj.GetUseAmount());
-                    break;
+                switch (collProj.GetProjectileType())
+                {
+                    case ProjectileScriptableObject.ProjectileType.DAMAGETOWER:
+                        Hit(collProj.GetUseAmount());
+                        Destroy(collision.gameObject);
+                        break;
+                    case ProjectileScriptableObject.ProjectileType.TOWERHEAL:
+                        Hit(-collProj.GetUseAmount());
+                        Destroy(collision.gameObject);
+                        break;
+                }
             }
         }
     }

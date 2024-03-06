@@ -59,14 +59,19 @@ public class Enemy : MonoBehaviour
         else if (collision.gameObject.CompareTag("Projectile"))
         {
             Projectile collProj = collision.gameObject.GetComponent<Projectile>();
-            switch (collProj.GetProjectileType())
+            if (collProj.canHit)
             {
-                case ProjectileScriptableObject.ProjectileType.DAMAGEENEMY:
-                    Hit(collProj.GetUseAmount());
-                    break;
-                case ProjectileScriptableObject.ProjectileType.ENEMYHEAL:
-                    Hit(-collProj.GetUseAmount());
-                    break;
+                switch (collProj.GetProjectileType())
+                {
+                    case ProjectileScriptableObject.ProjectileType.DAMAGEENEMY:
+                        Hit(collProj.GetUseAmount());
+                        Destroy(collision.gameObject);
+                        break;
+                    case ProjectileScriptableObject.ProjectileType.ENEMYHEAL:
+                        Hit(-collProj.GetUseAmount());
+                        Destroy(collision.gameObject);
+                        break;
+                }
             }
         }
 
@@ -94,6 +99,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        _Death(enemySO.deathParticles, transform.position);
+        if (enemySO.deathParticles)
+            _Death(enemySO.deathParticles, transform.position);
     }
 }

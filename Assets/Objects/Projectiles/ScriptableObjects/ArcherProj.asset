@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f6cd77df91e4c4cb0505b7a561e0f0, type: 3}
   m_Name: ArcherProj
   m_EditorClassIdentifier: 
-  projType: 2
-  useAmount: 20
-  speed: 20
+  projType: 3
+  useAmount: 10
+  speed: 50
+  lifetime: 2
+  particles: {fileID: 0}

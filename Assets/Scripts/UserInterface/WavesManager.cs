@@ -25,6 +25,8 @@ public class WavesManager : MonoBehaviour
     private GameObject enemyFolder;
     [SerializeField]
     private EnemyLocator[] enemyLocator;
+    [SerializeField]
+    private NextWaveButton waveButton;
 
     public Vector2 selectedEnemyLocator;
 
@@ -131,7 +133,8 @@ public class WavesManager : MonoBehaviour
     private void EndWave()
     {
         canWaveSpawn = true;
-        WaveComplete(waves);
+        waveButton.WaveCompleted(waves);
+        //WaveComplete(waves);
         _WaveReward(WaveConfig[waves - 1].moneyReward);
         canWaveSpawn = false;
     }

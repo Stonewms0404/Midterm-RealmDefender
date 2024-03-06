@@ -12,18 +12,13 @@ public class NextWaveButton : MonoBehaviour
     [SerializeField]
     private GameObject nextWaveButton;
 
-    void Start()
-    {
-        WavesManager.WaveComplete += WaveCompleted;
-    }
-
     public void NextWave()
     {
         nextWaveButton.SetActive(false);
         NextWaveButtonClicked();
     }
 
-    private void WaveCompleted(int wave)
+    public void WaveCompleted(int wave)
     {
         nextWaveButton.SetActive(true);
     }

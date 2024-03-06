@@ -17,6 +17,5 @@ public class ProjectileSpawner : MonoBehaviour
     private void SpawnProjectile(GameObject projectile, Transform trans)
     {
         Instantiate(projectile, trans.position, Quaternion.identity, transform);
-        Destroy(projectile, 5.0f);
     }
 }

@@ -10,15 +10,15 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject pauseMenuUI;
-    [SerializeField]
-    private LevelLoader levelLoader;
-    [SerializeField]
-    private SettingsScriptableObject settingsSO;
 
+    private SettingsManager settingsManager;
+    private LevelLoader levelLoader;
     public bool isPaused;
 
     private void Start()
     {
+        settingsManager = GameObject.FindGameObjectWithTag("SettingsManager").GetComponent<SettingsManager>();
+        levelLoader = GameObject.FindGameObjectWithTag("LevelLoader").GetComponent<LevelLoader>();
         pauseMenuUI.SetActive(false);
     }
 
@@ -53,7 +53,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        levelLoader.GoToScene(settingsSO.sceneIndex);
+        levelLoader.GoToScene(settingsManager.GetSceneIndex());
     }
 
     public void LoadMenu()

@@ -42,19 +42,19 @@ public class EnemyFolder : MonoBehaviour
         }
     }
 
-    public GameObject GetClosestEnemy(Vector2 pos)
+    public Vector2 GetClosestEnemy(Vector2 pos)
     {
         Enemy[] enemies = GetEnemies();
         if (enemies.Length == 0)
-            return null;
+            return Vector2.zero;
         else if (enemies.Length == 1)
-            return enemies[0].gameObject;
+            return enemies[0].gameObject.transform.position;
 
-        GameObject obj = enemies[0].gameObject;
-        float currentdist = GetAbsDistance(obj.transform.position, pos);
+        GameObject obj = null;
+        float currentdist = GetAbsDistance(pos, enemies[0].transform.position);
         for (int i = 1; i < enemies.Length; i++)
         {
-            float dist = GetAbsDistance(obj.transform.position, enemies[i].gameObject.transform.position);
+            float dist = GetAbsDistance(pos, enemies[i].gameObject.transform.position);
             if (dist <= currentdist)
             {
                 currentdist = dist;
@@ -62,7 +62,36 @@ public class EnemyFolder : MonoBehaviour
             }
         }
 
-        return obj;
+        if (obj != null)
+            return obj.transform.position;
+        else
+            return Vector2.zero;
+    }
+
+    public Vector2 GetClosestEnemy(Vector2 pos, float range)
+    {
+        Enemy[] enemies = GetEnemies();
+        if (enemies.Length == 0)
+            return Vector2.zero;
+        else if (enemies.Length == 1)
+            return enemies[0].gameObject.transform.position;
+
+        GameObject obj = null;
+        float currentdist = GetAbsDistance(pos, enemies[0].transform.position);
+        for (int i = 1; i < enemies.Length; i++)
+        {
+            float dist = GetAbsDistance(pos, enemies[i].gameObject.transform.position);
+            if (dist <= currentdist && dist <= range)
+            {
+                currentdist = dist;
+                obj = enemies[i].gameObject;
+            }
+        }
+
+        if (obj != null)
+            return obj.transform.position;
+        else
+            return Vector2.zero;
     }
 
     public Enemy[] GetEnemies()

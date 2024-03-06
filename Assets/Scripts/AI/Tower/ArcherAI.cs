@@ -12,7 +12,7 @@ public class ArcherAI : MonoBehaviour
     private EnemyFolder enemyFolder;
     private float useTimer;
     private bool canShoot;
-    private GameObject enemy;
+    private Vector2 enemy;
 
     private void Start()
     {
@@ -21,8 +21,8 @@ public class ArcherAI : MonoBehaviour
 
     private void Update()
     {
-        enemy = enemyFolder.GetEnemiesInRange((Vector2)transform.position, towerScript.GetSightRange());
-        if (enemy != null)
+        enemy = enemyFolder.GetClosestEnemy((Vector2)transform.position, towerScript.GetSightRange());
+        if (enemy != Vector2.zero)
         {
             Attack();
         }
@@ -37,7 +37,7 @@ public class ArcherAI : MonoBehaviour
             canShoot = true;
         }
 
-        if (Input.GetAxisRaw("Fire1") != 0 && canShoot)
+        if (canShoot)
         {
             Shoot();
             ResetShooting();
@@ -46,7 +46,7 @@ public class ArcherAI : MonoBehaviour
 
     public Vector2 GetClosestEnemy()
     {
-        return enemy.transform.position;
+        return enemy;
     }
 
     private void Shoot()

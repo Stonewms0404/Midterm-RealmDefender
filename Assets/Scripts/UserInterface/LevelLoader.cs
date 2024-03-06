@@ -8,6 +8,20 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     private SettingsManager settingsManager;
+    private static LevelLoader instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     private void Start()
     {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeavyScriptableObject
   m_EditorClassIdentifier: 
   EnemyName: Heavy
-  health: 80
+  health: 200
   attack: 20
   speed: 5
   moneyReward: 50

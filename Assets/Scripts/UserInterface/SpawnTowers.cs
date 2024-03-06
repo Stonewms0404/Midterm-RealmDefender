@@ -24,13 +24,13 @@ public class SpawnTowers : MonoBehaviour
             return towers[UnityEngine.Random.Range(0, towers.Length)].gameObject;
     }
 
-    public GameObject GetClosestTower(Vector2 pos)
+    public Vector2 GetClosestTower(Vector2 pos)
     {
         Tower[] towers = GetTowers();
         if (IsTowerArrayEmpty(towers))
-            return null;
+            return Vector2.zero;
         else if (towers.Length == 1)
-            return towers[0].gameObject;
+            return towers[0].gameObject.transform.position;
 
         GameObject obj = towers[0].gameObject;
         for (int i = 1; i < towers.Length; i++)
@@ -39,7 +39,7 @@ public class SpawnTowers : MonoBehaviour
                 obj = towers[i].gameObject;
         }
 
-        return obj;
+        return obj.transform.position;
     }
 
     public Tower[] GetTowers()
