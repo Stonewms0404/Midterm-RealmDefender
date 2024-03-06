@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemyName: Flying
   health: 20
   attack: 10
-  speed: 7
+  speed: 6
   moneyReward: 10
   canCollideWithTowers: 0
   enemyType: 2

@@ -24,6 +24,6 @@ Things to get done (3/4):
 -Tower AI
     -Slime
     -Knight
-    -Archer
-    -Cleric
+    -Archer (Done)
+    -Cleric (Done)
     -Wizard

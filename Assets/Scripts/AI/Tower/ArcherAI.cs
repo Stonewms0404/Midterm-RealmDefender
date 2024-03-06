@@ -11,8 +11,7 @@ public class ArcherAI : MonoBehaviour
 
     private EnemyFolder enemyFolder;
     private float useTimer;
-    private bool canShoot;
-    private GameObject enemy;
+    private bool canShoot = true;
 
     private void Start()
     {
@@ -23,9 +22,15 @@ public class ArcherAI : MonoBehaviour
     {
         if (towerScript.GetIfWaveIsRunning())
         {
-            enemy = enemyFolder.GetClosestEnemy((Vector2)transform.position, true);
-            if (enemy != null)
+            int enemyNum = enemyFolder.GetNumEnemiesInRange(this.transform.position, towerScript.GetSightRange());
+            if (enemyNum > 0)
             {
+                if (useTimer <= towerScript.GetUseTime() && !canShoot)
+                    useTimer += Time.deltaTime;
+                else
+                {
+                    canShoot = true;
+                }
                 Attack();
             }
         }
@@ -33,13 +38,6 @@ public class ArcherAI : MonoBehaviour
 
     private void Attack()
     {
-        if (useTimer <= towerScript.GetUseTime() && !canShoot)
-            useTimer += Time.deltaTime;
-        else
-        {
-            canShoot = true;
-        }
-
         if (canShoot)
         {
             Shoot();
@@ -54,7 +52,7 @@ public class ArcherAI : MonoBehaviour
 
     private void ResetShooting()
     {
-        canShoot = false;
         useTimer = 0.0f;
+        canShoot = false;
     }
 }

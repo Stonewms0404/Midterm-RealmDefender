@@ -13,6 +13,6 @@ public class ProjectileScriptableObject : ScriptableObject
 
     public ProjectileType projType;
     public int useAmount;
-    public float speed, lifetime;
+    public float speed, lifetime, sightRange;
     public GameObject particles;
 }

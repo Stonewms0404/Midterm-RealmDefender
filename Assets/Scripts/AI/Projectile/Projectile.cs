@@ -17,25 +17,38 @@ public class Projectile : MonoBehaviour
     private EnemyFolder enemyFolder;
     private Vector2 selectedObject;
     private float timer;
-    public bool canHit = true;
+    public bool canHit = true, foundObject;
 
     private void Start()
     {
         spawnTowers = GameObject.FindGameObjectWithTag("TowerSpawner").GetComponent<SpawnTowers>();
         enemyFolder = GameObject.FindGameObjectWithTag("EnemyFolder").GetComponent<EnemyFolder>();
 
-        if (projectileSO.projType == ProjectileScriptableObject.ProjectileType.DAMAGETOWER)
-            selectedObject = spawnTowers.GetClosestTower(transform.position);
-        else if (projectileSO.projType == ProjectileScriptableObject.ProjectileType.ENEMYHEAL ||
-            projectileSO.projType == ProjectileScriptableObject.ProjectileType.DAMAGEENEMY)
-            selectedObject = enemyFolder.GetClosestEnemy(transform.position);
-        else if (projectileSO.projType == ProjectileScriptableObject.ProjectileType.TOWERHEAL)
+        switch (projectileSO.projType)
         {
-            do
-            {
-                selectedObject = spawnTowers.GetRandomTower(transform.position);
-            } while (selectedObject == (Vector2)transform.position);
+            case ProjectileScriptableObject.ProjectileType.DAMAGETOWER:
+                selectedObject = spawnTowers.GetClosestTower(this.transform.position);
+                break;
+            case ProjectileScriptableObject.ProjectileType.DAMAGEENEMY:
+                selectedObject = enemyFolder.GetClosestEnemy(this.transform.position, projectileSO.sightRange);
+                break;
+            case ProjectileScriptableObject.ProjectileType.TOWERHEAL:
+                do
+                {
+                    selectedObject = spawnTowers.GetRandomTower(this.transform.position);
+                } while (selectedObject == (Vector2)this.transform.position);
+                break;
+            case ProjectileScriptableObject.ProjectileType.ENEMYHEAL:
+                break;
         }
+
+        if (selectedObject == Vector2.zero)
+        {
+            foundObject = false;
+            Destroy(gameObject);
+        }
+        else
+            foundObject = true;
     }
 
     void Update()
@@ -63,7 +76,7 @@ public class Projectile : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (projectileSO.particles)
+        if (projectileSO.particles && foundObject)
             _SpawnParticles(projectileSO.particles, gameObject.transform.position);
     }
 }
