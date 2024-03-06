@@ -17,6 +17,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject towerObject;
 
     private int health;
+    private WavesManager wavesManager;
 
     public bool shopOpen = false, isDead = false;
 
@@ -24,15 +25,22 @@ public class Tower : MonoBehaviour
     {
         health = towerSO.health;
 
+        wavesManager = GameObject.FindGameObjectWithTag("WavesManager").GetComponent<WavesManager>();
+
         if (buttonText)
         {
             buttonText.text = "\n\n\n\nCost\n" + towerSO.costOfTower + "G";
         }
     }
 
-    public void ShootProjectile(Transform trans)
+    public bool GetIfWaveIsRunning()
     {
-        _ShootProjectile(towerSO.projectile, trans);
+        return wavesManager.GetHasEnemiesLeft();
+    }
+
+    public void ShootProjectile(Transform trans, int projIndex)
+    {
+        _ShootProjectile(towerSO.projectile[projIndex], trans);
     }
     public float GetSightRange()
     {
@@ -94,12 +102,23 @@ public class Tower : MonoBehaviour
                         Destroy(collision.gameObject);
                         break;
                     case ProjectileScriptableObject.ProjectileType.TOWERHEAL:
-                        Hit(-collProj.GetUseAmount());
-                        Destroy(collision.gameObject);
+                        if (towerSO.towerType != TowerScriptableObject.TowerType.Cleric)
+                        {
+                            Hit(-collProj.GetUseAmount());
+                            Destroy(collision.gameObject);
+                        }
                         break;
                 }
             }
         }
+    }
+    public float GetAbsDistance(Vector2 obj)
+    {
+        return Mathf.Abs(Vector2.Distance((Vector2)transform.position, obj));
+    }
+    public float GetAbsDistance(Vector2 current, Vector2 obj)
+    {
+        return Mathf.Abs(Vector2.Distance(current, obj));
     }
 
     private void OnMouseDown()
@@ -114,7 +133,7 @@ public class Tower : MonoBehaviour
     //When the tower gets destroyed.
     private void OnDestroy()
     {
-        if (!buttonText)
+        if (!buttonText && towerSO.deathParticles)
             _Death(towerSO.deathParticles, transform.position);
     }
 }

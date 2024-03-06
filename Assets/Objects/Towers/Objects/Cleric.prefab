@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8679363272457810286}
   - component: {fileID: 5798610269616324353}
   - component: {fileID: 7235535396995691267}
+  - component: {fileID: 8718012934338075969}
   - component: {fileID: -5224921664324363990}
   - component: {fileID: 5904887924479621436}
   m_Layer: 0
@@ -104,6 +105,19 @@ MonoBehaviour:
   towerObject: {fileID: 7899537023813009065}
   shopOpen: 0
   isDead: 0
+--- !u!114 &8718012934338075969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7899537023813009065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97d9b29d9a167d44ad2bee3e684ebb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerScript: {fileID: 7235535396995691267}
 --- !u!50 &-5224921664324363990
 Rigidbody2D:
   serializedVersion: 4

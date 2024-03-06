@@ -7,10 +7,11 @@ public class EnemyFolder : MonoBehaviour
     public bool HasChildren;
     
     private GameObject[] objectsInRange;
-    
-    void Update()
+
+    public bool GetHasChildren()
     {
         HasChildren = transform.childCount <= 0;
+        return HasChildren;
     }
 
     public GameObject GetEnemiesInRange(Vector2 objPos, float range)
@@ -66,6 +67,31 @@ public class EnemyFolder : MonoBehaviour
             return obj.transform.position;
         else
             return Vector2.zero;
+    }
+    public GameObject GetClosestEnemy(Vector2 pos, bool value)
+    {
+        Enemy[] enemies = GetEnemies();
+        if (enemies.Length == 0)
+            return null;
+        else if (enemies.Length == 1)
+            return enemies[0].gameObject;
+
+        GameObject obj = null;
+        float currentdist = GetAbsDistance(pos, enemies[0].transform.position);
+        for (int i = 1; i < enemies.Length; i++)
+        {
+            float dist = GetAbsDistance(pos, enemies[i].gameObject.transform.position);
+            if (dist <= currentdist)
+            {
+                currentdist = dist;
+                obj = enemies[i].gameObject;
+            }
+        }
+
+        if (obj != null)
+            return obj;
+        else
+            return null;
     }
 
     public Vector2 GetClosestEnemy(Vector2 pos, float range)

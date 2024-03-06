@@ -15,3 +15,5 @@ MonoBehaviour:
   projType: 0
   useAmount: 20
   speed: 20
+  lifetime: 5
+  particles: {fileID: 0}

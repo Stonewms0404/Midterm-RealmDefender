@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class WavesManager : MonoBehaviour
 {
-    public static event Action<int> WaveComplete;
     public static event Action<bool> _WaveStarted;
     public static event Action<int> _WaveReward;
     public static event Action<int, GameObject, Transform> SpawnEnemyAtSpawner;
@@ -41,6 +40,11 @@ public class WavesManager : MonoBehaviour
     {
         folderOfEnemies = enemyFolder.GetComponent<EnemyFolder>();
         NextWaveButton.NextWaveButtonClicked += AddWave;
+    }
+
+    public bool GetHasEnemiesLeft()
+    {
+        return hasEnemiesLeft;
     }
 
     void FixedUpdate()
@@ -76,7 +80,7 @@ public class WavesManager : MonoBehaviour
                 SpawnEnemy();
                 SetHasEnemiesLeft();
             }
-            if (!hasEnemiesLeft && folderOfEnemies.HasChildren)
+            if (!hasEnemiesLeft)
             {
                 EndWave();
             }
@@ -89,7 +93,8 @@ public class WavesManager : MonoBehaviour
             enemyCount[0] != 0 ||
             enemyCount[1] != 0 ||
             enemyCount[2] != 0 ||
-            enemyCount[3] != 0;
+            enemyCount[3] != 0 ||
+            !folderOfEnemies.GetHasChildren();
     }
 
     private void SpawnEnemy()

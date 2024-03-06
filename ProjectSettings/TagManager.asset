@@ -12,6 +12,7 @@ TagManager:
   - EnemyFolder
   - SettingsManager
   - LevelLoader
+  - WavesManager
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3532515152210311604}
   - component: {fileID: -528900381683857721}
   - component: {fileID: -6480152535196471442}
+  - component: {fileID: 5716281232979348804}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -141,3 +142,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.1}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &5716281232979348804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052339572290872391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410030cd661ccfd40b349b31f19e0c17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,5 +14,6 @@ public class TowerScriptableObject : ScriptableObject
     public TowerType towerType;
     public int costOfTower, health;
     public float useSpeed, sightRange;
-    public GameObject deathParticles, projectile;
+    public GameObject deathParticles;
+    public GameObject[] projectile;
 }

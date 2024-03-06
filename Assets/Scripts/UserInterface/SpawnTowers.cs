@@ -41,6 +41,46 @@ public class SpawnTowers : MonoBehaviour
 
         return obj.transform.position;
     }
+    public Vector2 GetClosestTower(Vector2 pos, Vector2 currentPos, float range)
+    {
+        Tower[] towers = GetTowers();
+        if (IsTowerArrayEmpty(towers))
+            return Vector2.zero;
+        else if (towers.Length == 1 && (Vector2)towers[0].transform.position != currentPos)
+            return towers[0].gameObject.transform.position;
+
+
+        GameObject obj = null;
+        float currentDist = GetAbsDistance(towers[0].gameObject.transform.position, pos);
+        for (int i = 1; i < towers.Length; i++)
+        {
+            float dist = GetAbsDistance(towers[0].gameObject.transform.position, pos);
+            if (dist <= currentDist && dist <= range && (Vector2)towers[i].transform.position != currentPos)
+            {
+                obj = towers[i].gameObject;
+                currentDist = dist;
+            }
+        }
+
+        if (obj != null)
+            return obj.transform.position;
+        else
+            return Vector2.zero;
+    }
+
+    public Vector2 GetRandomTower(Vector2 pos)
+    {
+        Tower[] towers = GetTowers();
+        if (IsTowerArrayEmpty(towers))
+            return Vector2.zero;
+        else if (towers.Length == 1 && (Vector2)towers[0].transform.position != pos)
+            return towers[0].gameObject.transform.position;
+        else
+        {
+            int randNum = UnityEngine.Random.Range(0, towers.Length);
+            return towers[randNum].gameObject.transform.position;
+        }
+    }
 
     public Tower[] GetTowers()
     {

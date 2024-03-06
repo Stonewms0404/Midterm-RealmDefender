@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -23,18 +24,24 @@ public class Projectile : MonoBehaviour
         spawnTowers = GameObject.FindGameObjectWithTag("TowerSpawner").GetComponent<SpawnTowers>();
         enemyFolder = GameObject.FindGameObjectWithTag("EnemyFolder").GetComponent<EnemyFolder>();
 
-        if (projectileSO.projType == ProjectileScriptableObject.ProjectileType.TOWERHEAL ||
-            projectileSO.projType == ProjectileScriptableObject.ProjectileType.DAMAGETOWER)
+        if (projectileSO.projType == ProjectileScriptableObject.ProjectileType.DAMAGETOWER)
             selectedObject = spawnTowers.GetClosestTower(transform.position);
         else if (projectileSO.projType == ProjectileScriptableObject.ProjectileType.ENEMYHEAL ||
             projectileSO.projType == ProjectileScriptableObject.ProjectileType.DAMAGEENEMY)
             selectedObject = enemyFolder.GetClosestEnemy(transform.position);
-
+        else if (projectileSO.projType == ProjectileScriptableObject.ProjectileType.TOWERHEAL)
+        {
+            do
+            {
+                selectedObject = spawnTowers.GetRandomTower(transform.position);
+            } while (selectedObject == (Vector2)transform.position);
+        }
     }
 
     void Update()
     {
         rb.position = Vector2.MoveTowards(rb.position, selectedObject, projectileSO.speed * Time.deltaTime);
+        
         if (timer < projectileSO.lifetime)
             timer += Time.deltaTime;
         else
