@@ -16,4 +16,5 @@ MonoBehaviour:
   useAmount: 20
   speed: 20
   lifetime: 5
+  sightRange: 15
   particles: {fileID: 0}

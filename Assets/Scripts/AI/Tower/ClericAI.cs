@@ -12,7 +12,7 @@ public class ClericAI : MonoBehaviour
     private SpawnTowers spawnTowers;
     private float useTimer;
     private int numberOfTowersInRange;
-    private bool canHeal;
+    private bool canHeal = true;
 
     private void Start()
     {
@@ -32,21 +32,19 @@ public class ClericAI : MonoBehaviour
 
     private void Heal()
     {
+        numberOfTowersInRange = spawnTowers.FindNumTowers(transform.position, towerScript.GetSightRange());
+
+        if (numberOfTowersInRange > 1)
+            canHeal = true;
+
         if (canHeal)
             Shoot();
-        else
-        {
-            int numberOfTowersInRange = spawnTowers.FindNumTowers();
 
-            if (numberOfTowersInRange > 1)
-                canHeal = true;
-        }
-
-        ResetShooting();
     }
 
     private void Shoot()
     {
+        ResetShooting();
         for (int i = 0; i < numberOfTowersInRange - 1; i++)
         {
             towerScript.ShootProjectile(transform, 0);

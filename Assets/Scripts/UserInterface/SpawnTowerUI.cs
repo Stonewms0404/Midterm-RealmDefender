@@ -16,6 +16,8 @@ public class SpawnTowerUI : MonoBehaviour
     [SerializeField]
     private PauseMenu pauseMenu;
     [SerializeField]
+    private Canvas canvas;
+    [SerializeField]
     private GameObject spawnTowerUI, spawnPosition;
     [SerializeField]
     private UnityEngine.UI.Button[] towerButtons;
@@ -25,7 +27,7 @@ public class SpawnTowerUI : MonoBehaviour
     private Wallet wallet;
 
     [SerializeField] private bool canShow = true;
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 offset, bounds, boundsAdjusted;
 
     private void Start()
     {
@@ -36,18 +38,20 @@ public class SpawnTowerUI : MonoBehaviour
 
     private void Update()
     {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (pauseMenu.isPaused)
         {
             ToggleShop(false);
         }
         else if (gameObject.activeSelf && !pauseMenu.isPaused)
         {
-            if (Mathf.Abs(Vector2.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))) > 10.0f)
+            Vector2 dist = new(GetAbsDistance(transform.position.x, mousePos.x), GetAbsDistance(transform.position.y, mousePos.y));
+            SetCanvasSize();
+            if (dist.x > boundsAdjusted.x || dist.y > boundsAdjusted.y)
             {
                 ToggleShop(false);
             }
         }
-            
     }
 
     public void DisplayShop(string input, Transform trans)
@@ -55,6 +59,7 @@ public class SpawnTowerUI : MonoBehaviour
         if (input == "Show" && canShow && !pauseMenu.isPaused)
         {
             spawnTowerUI.transform.position = trans.position + offset;
+            SetCanvasSize();
 
             ToggleShop(true);
         }
@@ -62,6 +67,13 @@ public class SpawnTowerUI : MonoBehaviour
         {
             ToggleShop(false);
         }
+    }
+
+    private void SetCanvasSize()
+    {
+        canvas.transform.localScale = new(mainCamera.orthographicSize / 10, mainCamera.orthographicSize / 10, mainCamera.orthographicSize / 10);
+        boundsAdjusted.x = bounds.x * canvas.transform.localScale.x;
+        boundsAdjusted.y = bounds.y * canvas.transform.localScale.y;
     }
 
     private void ToggleShop(bool value)
@@ -72,7 +84,7 @@ public class SpawnTowerUI : MonoBehaviour
 
     public void UpdateButtons(int wallet)
     {
-        for (int i = 0; i < towerButtons.Length; i++) 
+        for (int i = 0; i < towerButtons.Length; i++)
         {
             Tower towerComponent = towerButtons[i].GetComponent<Tower>();
             if (towerComponent.GetCostOfTower() <= wallet)
@@ -103,8 +115,17 @@ public class SpawnTowerUI : MonoBehaviour
         _ShopOpen(true);
     }
 
-    private void OnMouseExit()
+    private float GetAbsDistance(Vector2 to)
     {
-        ToggleShop(false);
+        return Mathf.Abs(Vector2.Distance(transform.position, to));
+    }
+    private float GetAbsDistance(Vector2 from, Vector2 to)
+    {
+        return Mathf.Abs(Vector2.Distance(from, to));
+    }
+
+    private float GetAbsDistance(float from, float to)
+    {
+        return Mathf.Abs(from - to);
     }
 }

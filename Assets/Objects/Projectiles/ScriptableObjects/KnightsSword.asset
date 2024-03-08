@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57f6cd77df91e4c4cb0505b7a561e0f0, type: 3}
-  m_Name: WizardProj2
+  m_Name: KnightsSword
   m_EditorClassIdentifier: 
   projType: 3
   useAmount: 100
-  speed: 50
-  lifetime: 2
-  sightRange: 10
+  speed: 5
+  lifetime: 1
+  sightRange: 0
   particles: {fileID: 0}

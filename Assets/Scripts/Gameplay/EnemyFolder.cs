@@ -36,22 +36,21 @@ public class EnemyFolder : MonoBehaviour
         }
     }
 
-    public GameObject GetEnemiesInRange(Vector2 objPos, float range) //Unimplemented method for Enemy Healing.
+    public GameObject[] GetEnemiesInRange(Vector2 objPos, float range) //Unimplemented method for Enemy Healing.
     {
         Enemy[] enemies = GetEnemies();
+        GameObject[] enemiesInRange = null;
+
         if (enemies.Length == 0)
             return null;
-        else if (enemies.Length == 1)
-            return enemies[0].gameObject;
 
-        GameObject closestObject = enemies[0].gameObject;
         float closestDistance = range;
         for (int i = 0; i < enemies.Length; i++)
         {
             float dist = GetAbsDistance(objPos, (Vector2)enemies[i].gameObject.transform.position);
             if (dist < closestDistance)
             {
-                closestObject = enemies[i].gameObject;
+                enemiesInRange[enemiesInRange.Length] = enemies[i].gameObject;
                 closestDistance = dist;
             }
         }
@@ -61,7 +60,7 @@ public class EnemyFolder : MonoBehaviour
         }
         else
         {
-            return closestObject;
+            return enemiesInRange;
         }
     }
 

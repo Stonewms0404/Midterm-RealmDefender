@@ -93,6 +93,24 @@ public class SpawnTowers : MonoBehaviour
 
         return numberOfTowersInRange;
     }
+    //Find the number of towers.
+    public int FindNumTowers(Vector2 pos, float range)
+    {
+        int numberOfTowersInRange = 0;
+        Tower[] towers = GetTowers();
+
+        for (int i = 0; i < towers.Length; i++)
+        {
+            if (towers[i].transform.position != transform.position)
+            {
+                float dist = GetAbsDistance(pos, towers[i].gameObject.transform.position);
+                if (dist <= range)
+                    numberOfTowersInRange++;
+            }
+        }
+
+        return numberOfTowersInRange;
+    }
 
     //Find all of the towers currently.
     public Tower[] GetTowers()

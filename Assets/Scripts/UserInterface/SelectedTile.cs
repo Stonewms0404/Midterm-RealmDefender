@@ -11,9 +11,8 @@ public class SelectedTile : MonoBehaviour
 
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Vector3 offset;
-
-    //private string[] hoveredItem;
-    [SerializeField] private bool isShopOpen, canOpenShop = true;
+    [SerializeField] private NextWaveButton waveButton;
+    [SerializeField] private bool isShopOpen, canOpenShop = true, isNextButtonHovered;
 
     private void OnEnable()
     {
@@ -30,7 +29,7 @@ public class SelectedTile : MonoBehaviour
         _DisplayShop("Hide", transform);
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         DisplayShopAtLocation();
         if (!isShopOpen && canOpenShop)
@@ -43,14 +42,14 @@ public class SelectedTile : MonoBehaviour
 
     private void DisplayShopAtLocation()
     {
+        if (Input.GetMouseButtonDown(0) && !isShopOpen && canOpenShop && !waveButton.hovered)
+        {
+            _DisplayShop("Show", transform);
+        }
         if (Input.GetMouseButtonDown(1))
         {
             isShopOpen = false;
             _DisplayShop("Hide", transform);
-        }
-        if (Input.GetMouseButtonDown(0) && !isShopOpen && canOpenShop)
-        {
-            _DisplayShop("Show", transform);
         }
     }
 

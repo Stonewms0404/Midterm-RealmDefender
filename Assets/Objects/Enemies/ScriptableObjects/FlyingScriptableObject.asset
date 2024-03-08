@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlyingScriptableObject
   m_EditorClassIdentifier: 
   EnemyName: Flying
-  health: 20
+  health: 70
   attack: 10
   speed: 6
   moneyReward: 10

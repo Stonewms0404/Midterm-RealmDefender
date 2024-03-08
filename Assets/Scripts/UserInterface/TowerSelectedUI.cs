@@ -24,6 +24,7 @@ public class TowerSelectedUI : MonoBehaviour
     private int sellAmount;
 
     public TextMeshProUGUI healthText, sellText;
+    private object boundsAdjusted;
 
     private void Start()
     {
@@ -63,6 +64,12 @@ public class TowerSelectedUI : MonoBehaviour
             {
                 CloseMenu();
             }
+            //Vector2 dist = new(GetAbsDistance(transform.position.x, mousePos.x), GetAbsDistance(transform.position.y, mousePos.y));
+            //if (dist.x > boundsAdjusted.x || dist.y > boundsAdjusted.y)
+            //{
+            //    isOpen = false;
+            //    ToggleMenu();
+            //}
         }
     }
 

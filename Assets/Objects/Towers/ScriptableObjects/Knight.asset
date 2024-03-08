@@ -15,6 +15,8 @@ MonoBehaviour:
   towerType: 1
   costOfTower: 200
   health: 70
-  useAmount: 10
-  useSpeed: 0.5
+  useSpeed: 3
+  sightRange: 0
   deathParticles: {fileID: 6754737692759837850, guid: 29ff99f59e4e5dd4ea33c75fde449cab, type: 3}
+  projectile:
+  - {fileID: 7805075688963166264, guid: aef9f21de9c283a429a0694e3883a808, type: 3}
