@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 1658080027898113813}
   m_Layer: 5
   m_Name: TowerSelectedUI
-  m_TagString: Untagged
+  m_TagString: TowerSelectedUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -973,7 +973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9afb7a55171ab64b872b09cf50f5a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
   towerSelectedUI: {fileID: 6586577448608878694}
+  selectedTowerObj: {fileID: 0}
+  sellTowerButton: {fileID: 6586577447333275849}
   healthText: {fileID: 4410993403094901724}
   sellText: {fileID: 6797297612191675254}
 --- !u!61 &1658080027898113813

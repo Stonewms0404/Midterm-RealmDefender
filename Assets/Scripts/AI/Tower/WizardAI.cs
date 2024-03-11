@@ -23,6 +23,7 @@ public class WizardAI : MonoBehaviour
             int enemyNum = enemyFolder.GetNumEnemiesInRange(this.transform.position, towerScript.GetSightRange());
             if (enemyNum > 0)
             {
+                towerScript.LookTowardsObject(enemyFolder.GetClosestEnemy(this.transform.position, towerScript.GetSightRange()));
                 if (useTimer <= towerScript.GetUseTime() && !canShoot)
                     useTimer += Time.deltaTime;
                 else
@@ -41,11 +42,12 @@ public class WizardAI : MonoBehaviour
             Shoot();
             ResetShooting();
         }
+
     }
 
     private void Shoot()
     {
-        towerScript.ShootProjectile(transform, UnityEngine.Random.Range(0,2));
+        towerScript.ShootProjectile(transform, Random.Range(0,2));
     }
 
     private void ResetShooting()

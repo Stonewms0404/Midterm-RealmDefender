@@ -44,37 +44,42 @@ public class SpawnTowers : MonoBehaviour
             return towers[UnityEngine.Random.Range(0, towers.Length)].gameObject;
     }
     //Find all towers, and get a random one based upon location.
-    public Vector2 GetRandomTower(Vector2 pos)
+    public Tower GetRandomTower(Vector2 pos)
     {
         Tower[] towers = GetTowers();
         if (IsTowerArrayEmpty(towers))
-            return Vector2.zero;
+            return null;
         else if (towers.Length == 1 && (Vector2)towers[0].transform.position != pos)
-            return towers[0].gameObject.transform.position;
+            return towers[0];
         else
         {
             int randNum = UnityEngine.Random.Range(0, towers.Length);
-            return towers[randNum].gameObject.transform.position;
+            return towers[randNum];
         }
     }
 
     //Find all towers, and check the distance between the position and the towers and find the closest.
-    public Vector2 GetClosestTower(Vector2 pos) 
+    public GameObject GetClosestTower(Vector2 pos) 
     {
         Tower[] towers = GetTowers();
         if (IsTowerArrayEmpty(towers))
-            return Vector2.zero;
+            return null;
         else if (towers.Length == 1)
-            return towers[0].gameObject.transform.position;
+            return towers[0].gameObject;
 
         GameObject obj = towers[0].gameObject;
+        float currentDist = GetAbsDistance(obj.transform.position, pos);
         for (int i = 1; i < towers.Length; i++)
         {
-            if (GetAbsDistance(obj.transform.position, towers[i].gameObject.transform.position) <= GetAbsDistance(obj.transform.position, pos))
+            float dist = GetAbsDistance(obj.transform.position, towers[i].gameObject.transform.position);
+            if (dist <= currentDist)
+            {
                 obj = towers[i].gameObject;
+                currentDist = dist;
+            }
         }
 
-        return obj.transform.position;
+        return obj;
     }
 
     //Find the number of towers.

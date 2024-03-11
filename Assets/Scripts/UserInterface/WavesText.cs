@@ -9,10 +9,15 @@ public class WavesText : MonoBehaviour
     private TextMeshProUGUI wavesText;
     private int waves = 0;
 
-    private void Start()
+    private void Awake()
     {
         gameObject.SetActive(false);
         NextWaveButton.NextWaveButtonClicked += ChangeWavesText;
+    }
+
+    private void OnDestroy()
+    {
+        NextWaveButton.NextWaveButtonClicked -= ChangeWavesText;
     }
 
     private void ChangeWavesText()

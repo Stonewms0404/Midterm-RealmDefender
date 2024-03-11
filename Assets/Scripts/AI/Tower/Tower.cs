@@ -9,28 +9,59 @@ public class Tower : MonoBehaviour
     public static event Action<int, GameObject> _BuyTower;
     public static event Action<Transform, GameObject> _OpenTowerMenu;
     public static event Action<int> _GotHit;
-    public static event Action<GameObject, Vector2> _Death;
+    public static event Action<GameObject, Vector2> _SpawnParticle;
     public static event Action<GameObject, Transform> _ShootProjectile;
 
-    [SerializeField] private TowerScriptableObject towerSO;
-    [SerializeField] private TextMeshProUGUI buttonText;
-    [SerializeField] private GameObject towerObject;
+    [SerializeField] TowerScriptableObject towerSO;
+    [SerializeField] TextMeshProUGUI buttonText;
+    [SerializeField] GameObject towerObject;
+    [SerializeField] WavesManager wavesManager;
+    [SerializeField] SpawnTowerUI shopUI;
 
     private int health;
-    private WavesManager wavesManager;
 
-    public bool shopOpen = false, isDead = false;
+    public bool shopOpen = false, isDead = false, towerMenuOpen = false;
+
+    private void Awake()
+    {
+        SpawnTowerUI._ShopOpen += SetShopOpen;
+        TowerSelectedUI._TowerMenuOpen += SetTowerMenuOpen;
+    }
 
     private void Start()
     {
         health = towerSO.health;
-
         wavesManager = GameObject.FindGameObjectWithTag("WavesManager").GetComponent<WavesManager>();
+        GameObject.FindGameObjectWithTag("Shop").TryGetComponent<SpawnTowerUI>(out SpawnTowerUI spawnTower);
+
+        if (spawnTower)
+            shopUI = spawnTower;
 
         if (buttonText)
-        {
             buttonText.text = "\n\n\n\nCost\n" + towerSO.costOfTower + "G";
-        }
+    }
+    private void Update()
+    {
+        if (isDead)
+            Destroy(gameObject);
+    }
+
+    private void SetTowerMenuOpen(bool value)
+    {
+        towerMenuOpen = value;
+    }
+
+    public void LookTowardsObject(Vector2 obj)
+    {
+        if (transform.position.x - Mathf.Abs(obj.x) <= 0 && transform.localScale.x > 0)
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        else
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+
+    public TowerScriptableObject.TowerType GetTowerType()
+    {
+        return towerSO.towerType;
     }
 
     public bool GetIfWaveIsRunning()
@@ -45,6 +76,10 @@ public class Tower : MonoBehaviour
     public float GetSightRange()
     {
         return towerSO.sightRange;
+    }
+    private void SetShopOpen(bool value)
+    {
+        shopOpen = value;
     }
     public float GetUseTime()
     {
@@ -69,6 +104,7 @@ public class Tower : MonoBehaviour
         health = Math.Clamp(health, 0, towerSO.health);
         if (health <= 0)
         {
+            isDead = true;
             Destroy(this.gameObject);
         }
         if (CompareTag("TowerSelected"))
@@ -92,8 +128,8 @@ public class Tower : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Projectile"))
         {
-            Projectile collProj = collision.gameObject.GetComponent<Projectile>();
-            if (collProj.canHit)
+            collision.gameObject.TryGetComponent<Projectile>(out Projectile collProj);// Knight's Sword does not have the projectile component.
+            if (collProj && towerSO.towerType != TowerScriptableObject.TowerType.Cleric)
             {
                 switch (collProj.GetProjectileType())
                 {
@@ -102,16 +138,15 @@ public class Tower : MonoBehaviour
                         Destroy(collision.gameObject);
                         break;
                     case ProjectileScriptableObject.ProjectileType.TOWERHEAL:
-                        if (towerSO.towerType != TowerScriptableObject.TowerType.Cleric)
-                        {
-                            Hit(-collProj.GetUseAmount());
-                            Destroy(collision.gameObject);
-                        }
+                        Hit(-collProj.GetUseAmount());
+                        _SpawnParticle(towerSO.healParticels, transform.position);
+                        Destroy(collision.gameObject);
                         break;
                 }
             }
         }
     }
+
     public float GetAbsDistance(Vector2 obj)
     {
         return Mathf.Abs(Vector2.Distance((Vector2)transform.position, obj));
@@ -123,7 +158,7 @@ public class Tower : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!buttonText && !shopOpen)
+        if (!buttonText && !shopOpen && !shopUI.GetIsOpen() && !towerMenuOpen)
         {
             tag = "TowerSelected";
             _OpenTowerMenu(this.gameObject.transform, this.gameObject);
@@ -134,6 +169,8 @@ public class Tower : MonoBehaviour
     private void OnDestroy()
     {
         if (!buttonText && towerSO.deathParticles)
-            _Death(towerSO.deathParticles, transform.position);
+            _SpawnParticle(towerSO.deathParticles, transform.position);
+        SpawnTowerUI._ShopOpen -= SetShopOpen;
+        TowerSelectedUI._TowerMenuOpen -= SetTowerMenuOpen;
     }
 }

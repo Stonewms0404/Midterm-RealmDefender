@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: SlimeProj
   m_EditorClassIdentifier: 
   projType: 3
+  specialEffect: 0
   useAmount: 1
-  speed: 60
+  speed: 50
   lifetime: 2
   sightRange: 30
   particles: {fileID: 0}
+  SFX: {fileID: 3872508696863496102, guid: e0b99e2b084627a4ea05fea0fbbe146f, type: 3}

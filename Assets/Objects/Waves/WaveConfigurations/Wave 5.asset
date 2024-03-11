@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Wave 5
   m_EditorClassIdentifier: 
   waveNumber: 5
-  moneyReward: 1250
-  sprint: 15
-  heavy: 10
-  flying: 10
+  moneyReward: 0
+  sprint: 20
+  heavy: 30
+  flying: 50
   exploding: 0
-  spawnTimer: 1
+  spawnTimer: 0.7

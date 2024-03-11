@@ -12,26 +12,22 @@ public class TowerSelectedUI : MonoBehaviour
     public static event Action<bool> _TowerMenuOpen;
     public static event Action<int> _SellTower;
 
-    [SerializeField]
-    private PauseMenu pauseMenu;
-    [SerializeField]
-    private GameObject towerSelectedUI, selectedTowerObj;
-    [SerializeField]
-    private Button sellTowerButton;
+    [Header ("Objects")]
+    [SerializeField] Button sellTowerButton;
+    public TextMeshProUGUI healthText, sellText;
+    [SerializeField] GameObject towerSelectedUI, selectedTowerObj;
+    [SerializeField] GameObject[] menuObj;
 
     private Tower selectedTower;
-    private bool isOpen = false, towerSold = false;
+    private bool isOpen = false, towerSold = false, menusOpen;
     private int sellAmount;
 
-    public TextMeshProUGUI healthText, sellText;
-    private object boundsAdjusted;
 
     private void Start()
     {
         towerSelectedUI.SetActive(false);
         Tower._OpenTowerMenu += OpenMenu;
     }
-
     private void OnEnable()
     {
         Tower._GotHit += AdjustTowerHealthText;
@@ -41,14 +37,29 @@ public class TowerSelectedUI : MonoBehaviour
     {
         Tower._GotHit -= AdjustTowerHealthText;
     }
+    private void OnDestroy()
+    {
+        Tower._OpenTowerMenu -= OpenMenu;
+    }
+
+    private void SetMenuOpen()
+    {
+        for (int i = 0; i < menuObj.Length; i++)
+        {
+            menusOpen = menuObj[i].activeInHierarchy;
+            if (menusOpen)
+                return;
+        }
+    }
 
     private void Update()
     {
-        if (pauseMenu.isPaused)
+        SetMenuOpen();
+        if (menusOpen)
         {
             CloseMenu();
         }
-        else if (isOpen && !pauseMenu.isPaused)
+        else if (isOpen && !menusOpen)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mouseDist = new(MathF.Abs(mousePos.x - transform.position.x), MathF.Abs(mousePos.y - transform.position.y));
@@ -56,20 +67,14 @@ public class TowerSelectedUI : MonoBehaviour
             {
                 CloseMenu();
             }
-            else if (mouseDist.x >= 8.0f || mouseDist.y >= 4.0f)
-            {
-                CloseMenu();
-            }
             else if (selectedTower.IsDestroyed())
             {
                 CloseMenu();
             }
-            //Vector2 dist = new(GetAbsDistance(transform.position.x, mousePos.x), GetAbsDistance(transform.position.y, mousePos.y));
-            //if (dist.x > boundsAdjusted.x || dist.y > boundsAdjusted.y)
-            //{
-            //    isOpen = false;
-            //    ToggleMenu();
-            //}
+            else if (mouseDist.x >= 8.0f || mouseDist.y >= 4.0f)
+            {
+                CloseMenu();
+            }
         }
     }
 
@@ -79,14 +84,14 @@ public class TowerSelectedUI : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("TowerSelected").tag = "Untagged";
         }
-        towerSelectedUI.SetActive(!towerSelectedUI.activeSelf);
+        towerSelectedUI.SetActive(isOpen);
         selectedTower.shopOpen = isOpen;
-        _TowerMenuOpen(!isOpen);
     }
 
     public void CloseMenu()
     {
         isOpen = false;
+        _TowerMenuOpen(false);
         ToggleMenu();
         selectedTower = null;
     }
@@ -102,6 +107,7 @@ public class TowerSelectedUI : MonoBehaviour
 
         towerSelectedUI.transform.position = trans.position;
         isOpen = true;
+        _TowerMenuOpen(true);
         ToggleMenu();
     }
 
@@ -111,8 +117,11 @@ public class TowerSelectedUI : MonoBehaviour
         {
             CloseMenu();
         }
-        healthText.text = newHealth + "/" + selectedTower.GetMaxHealth() + " HP";
-        AdjustTowerSellValue(newHealth);
+        else
+        {
+            healthText.text = newHealth + "/" + selectedTower.GetMaxHealth() + " HP";
+            AdjustTowerSellValue(newHealth);
+        }
     }
 
     private void AdjustTowerSellValue(int newHealth)
@@ -129,4 +138,9 @@ public class TowerSelectedUI : MonoBehaviour
         towerSold = true;
         CloseMenu();
     }
+
+    public bool GetIsOpen()
+    {
+        return isOpen;
+    }    
 }

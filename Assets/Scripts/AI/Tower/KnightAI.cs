@@ -23,13 +23,14 @@ public class KnightAI : MonoBehaviour
             int enemyNum = enemyFolder.GetNumEnemiesInRange(this.transform.position, towerScript.GetSightRange());
             if (enemyNum > 0)
             {
+                towerScript.LookTowardsObject(enemyFolder.GetClosestEnemy(this.transform.position, towerScript.GetSightRange()));
                 if (useTimer <= towerScript.GetUseTime() && !canAttack)
                     useTimer += Time.deltaTime;
                 else
                 {
                     canAttack = true;
+                    Attack();
                 }
-                Attack();
             }
         }
     }
@@ -40,6 +41,8 @@ public class KnightAI : MonoBehaviour
         {
             towerScript.ShootProjectile(transform, 0);
         }
+        ResetAttack();
+
     }
 
     private void ResetAttack()

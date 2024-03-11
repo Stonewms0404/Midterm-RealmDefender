@@ -3,25 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Options : MonoBehaviour
 {
-    [SerializeField]
-    private Toggle musicToggle, sfxToggle, particlesToggle;
+    [SerializeField] Toggle musicToggle, sfxToggle, particlesToggle, fullscreenToggle;
+    [SerializeField] SettingsScriptableObject settingsSO;
 
-    private void OnEnable()
+    private void Awake()
     {
-        SettingsManager.AdjustSettings += AdjustToggle;
-    }
-    private void OnDisable()
-    {
-        SettingsManager.AdjustSettings -= AdjustToggle;
+        musicToggle.isOn = settingsSO.music;
+        sfxToggle.isOn = settingsSO.sfx;
+        particlesToggle.isOn = settingsSO.particles;
+        fullscreenToggle.isOn = settingsSO.fullscreen;
+        ToggleFullscreen(settingsSO.fullscreen);
     }
 
-    private void AdjustToggle(bool music, bool sfx, bool particles)
+    public void ToggleMusic(bool value)
     {
-        musicToggle.isOn = music;
-        sfxToggle.isOn = sfx;
-        particlesToggle.isOn = particles;
+        settingsSO.music = value;
+    }
+
+    public void ToggleSFX(bool value)
+    {
+        settingsSO.sfx = value;
+    }
+
+    public void ToggleParticles(bool value)
+    {
+        settingsSO.particles = value;
+    }
+
+    public void ToggleFullscreen(bool value)
+    {
+        settingsSO.fullscreen = value;
+        Screen.fullScreen = settingsSO.fullscreen;
     }
 }

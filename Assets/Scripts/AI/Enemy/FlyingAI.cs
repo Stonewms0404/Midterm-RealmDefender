@@ -73,7 +73,7 @@ public class FlyingAI : MonoBehaviour
         switch (randAttack)
         {
             case 0:
-                attack = attack.Perpendicular1();
+                attack *= new Vector2(UnityEngine.Random.Range(-1, 2), UnityEngine.Random.Range(-1, 2));
                 break;
             case 1:
             case 2:

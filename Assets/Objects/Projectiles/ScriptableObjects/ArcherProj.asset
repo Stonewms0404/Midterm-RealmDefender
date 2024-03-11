@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: ArcherProj
   m_EditorClassIdentifier: 
   projType: 3
-  useAmount: 10
-  speed: 50
-  lifetime: 2
-  sightRange: 15
+  specialEffect: 0
+  useAmount: 15
+  speed: 40
+  lifetime: 2.5
+  sightRange: 30
   particles: {fileID: 0}
+  SFX: {fileID: 382335739041685703, guid: 7bbf724e2d0997f4b888395095176947, type: 3}

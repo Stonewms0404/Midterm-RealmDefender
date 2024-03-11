@@ -1,22 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    [SerializeField]
-    private SettingsScriptableObject settingsSO;
+    [SerializeField] SettingsScriptableObject settingsSO;
 
     private void OnEnable()
     {
-        Tower._Death += SpawnParticles;
-        Enemy._Death += SpawnParticles;
+        Tower._SpawnParticle += SpawnParticles;
+        Enemy._SpawnParticles += SpawnParticles;
         Projectile._SpawnParticles += SpawnParticles;
     }
     private void OnDisable()
     {
-        Tower._Death -= SpawnParticles;
-        Enemy._Death -= SpawnParticles;
+        Tower._SpawnParticle -= SpawnParticles;
+        Enemy._SpawnParticles -= SpawnParticles;
         Projectile._SpawnParticles -= SpawnParticles;
     }
 

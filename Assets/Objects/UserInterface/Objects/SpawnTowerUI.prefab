@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983826519924087008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2333189665920211037}
@@ -340,8 +340,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3852928536368389857}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4000001, z: 0}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5297368177044428186}
@@ -429,7 +429,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 264206521366280556}
   - {fileID: 5119225830427965091}
@@ -550,8 +550,11 @@ MonoBehaviour:
   towerSO: {fileID: 11400000, guid: fd6fb7aa2f12f2644a6a2d12871e7e51, type: 2}
   buttonText: {fileID: 6763374461809683571}
   towerObject: {fileID: 569828570721792074, guid: ddd41e21dc4605f46a92147c664ae719, type: 3}
+  wavesManager: {fileID: 0}
+  shopUI: {fileID: 0}
   shopOpen: 0
   isDead: 0
+  towerMenuOpen: 0
 --- !u!1 &4132029045697350407
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +585,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3613668305451124865}
   - {fileID: 608334445617462620}
@@ -703,8 +706,11 @@ MonoBehaviour:
   towerSO: {fileID: 11400000, guid: be3c10bd6666424438b9241e6535b8ef, type: 2}
   buttonText: {fileID: 7777177855593308017}
   towerObject: {fileID: 877240067684661973, guid: 614d1cf744edd6c428aa49af98cd8496, type: 3}
+  wavesManager: {fileID: 0}
+  shopUI: {fileID: 0}
   shopOpen: 0
   isDead: 0
+  towerMenuOpen: 0
 --- !u!1 &4336336156196819872
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,8 +736,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4336336156196819872}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 254447289455104071}
@@ -1173,10 +1179,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6673694488015601204}
   - component: {fileID: 6216461198862047961}
-  - component: {fileID: 1421170723}
   m_Layer: 0
   m_Name: SpawnTowerUI
-  m_TagString: Untagged
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1215,44 +1220,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f8925f6e8114545bb816f5b7745a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTowerUI: {fileID: 6673694488015601207}
-  spawnPosition: {fileID: 4773300416627163079}
+  pauseMenu: {fileID: 0}
+  deathMenu: {fileID: 0}
+  victoryMenu: {fileID: 0}
+  wallet: {fileID: 0}
   towerButtons:
   - {fileID: 4955323921088375844}
   - {fileID: 6673694488648282143}
   - {fileID: 7222385925135309708}
   - {fileID: 2564090103892843438}
   - {fileID: 1414409937350356958}
+  canvas: {fileID: 6673694489029910701}
+  spawnTowerUI: {fileID: 6673694488015601207}
+  canvasObj: {fileID: 6673694489029910673}
+  circleObj: {fileID: 4773300416627163079}
   mainCamera: {fileID: 0}
-  wallet: {fileID: 0}
-  canShow: 1
   offset: {x: 0, y: -1.1, z: 0}
---- !u!61 &1421170723
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6673694488015601207}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.2}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 12, y: 6}
-  m_EdgeRadius: 0
+  bounds: {x: 10, y: 5, z: 0}
+  boundsAdjusted: {x: 0, y: 0, z: 0}
+  towerMenuOpen: 0
+  isOpen: 0
+  menusOpen: 0
 --- !u!1 &6673694488474748782
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1413,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6673694488474748783}
   - {fileID: 6673694489277994891}
@@ -1546,8 +1534,11 @@ MonoBehaviour:
   towerSO: {fileID: 11400000, guid: d198e8f781449a341afbc77378720507, type: 2}
   buttonText: {fileID: 6673694488474748780}
   towerObject: {fileID: 6728374249316632169, guid: 5c74788232230c7459d4b9c87f0ccbfe, type: 3}
+  wavesManager: {fileID: 0}
+  shopUI: {fileID: 0}
   shopOpen: 0
   isDead: 0
+  towerMenuOpen: 0
 --- !u!1 &6673694489029910673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,8 +1568,8 @@ RectTransform:
   m_GameObject: {fileID: 6673694489029910673}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6673694488648282142}
   - {fileID: 2333189665920211037}
@@ -1673,7 +1664,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: -4.5
+  m_Spacing: -4
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1706,8 +1697,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6673694489277994890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6673694488648282142}
@@ -1795,7 +1786,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6323817870274669156}
   - {fileID: 9163713083706688926}
@@ -1916,8 +1907,11 @@ MonoBehaviour:
   towerSO: {fileID: 11400000, guid: 4a0fbb76882e58a41ad987a933184be5, type: 2}
   buttonText: {fileID: 6357082244047850487}
   towerObject: {fileID: 7899537023813009065, guid: cc80105368d658045bcf37261d64e155, type: 3}
+  wavesManager: {fileID: 0}
+  shopUI: {fileID: 0}
   shopOpen: 0
   isDead: 0
+  towerMenuOpen: 0
 --- !u!1 &7754655307124564829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,8 +1937,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7754655307124564829}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4000001, z: 0}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3113324047165600872}
@@ -2174,7 +2168,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6155026791877901101}
   - {fileID: 1235856340666248873}
@@ -2295,5 +2289,8 @@ MonoBehaviour:
   towerSO: {fileID: 11400000, guid: 970adbb81fe863f4aa24fcc62637ef61, type: 2}
   buttonText: {fileID: 4999427326339137208}
   towerObject: {fileID: 2052339572290872391, guid: e9d7ca04492e0f14893c778f0222229d, type: 3}
+  wavesManager: {fileID: 0}
+  shopUI: {fileID: 0}
   shopOpen: 0
   isDead: 0
+  towerMenuOpen: 0

@@ -24,6 +24,7 @@ public class SlimeAI : MonoBehaviour
             enemyNum = enemyFolder.GetNumEnemiesInRange(this.transform.position, towerScript.GetSightRange());
             if (enemyNum > 0)
             {
+                towerScript.LookTowardsObject(enemyFolder.GetClosestEnemy(this.transform.position, towerScript.GetSightRange()));
                 if (useTimer <= towerScript.GetUseTime() && !canShoot)
                     useTimer += Time.deltaTime;
                 else
@@ -42,6 +43,7 @@ public class SlimeAI : MonoBehaviour
             Shoot();
             ResetShooting();
         }
+
     }
 
     private void Shoot()

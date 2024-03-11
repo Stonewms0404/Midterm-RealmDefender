@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave 1
   m_EditorClassIdentifier: 
   waveNumber: 1
-  moneyReward: 600
+  moneyReward: 1000
   sprint: 20
   heavy: 0
   flying: 0

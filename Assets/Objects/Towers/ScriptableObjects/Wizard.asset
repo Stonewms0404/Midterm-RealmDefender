@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Wizard
   m_EditorClassIdentifier: 
   towerType: 4
-  costOfTower: 500
+  costOfTower: 600
   health: 120
-  useSpeed: 1.5
+  useSpeed: 1.2
   sightRange: 20
   deathParticles: {fileID: 311577449298023507, guid: df03ef19fb576d04bb06ec7e7e448282, type: 3}
+  healParticels: {fileID: 455134691599124975, guid: 0a3aa444090a8824cb9e740d7ce15fa6, type: 3}
   projectile:
   - {fileID: 5810383814765082423, guid: 8c5d570e9f66b254894d6aff766bf2c7, type: 3}
   - {fileID: 5810383814765082423, guid: 8993ccf79375072499dad8740a0eccc6, type: 3}

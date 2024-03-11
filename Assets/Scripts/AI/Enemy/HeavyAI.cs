@@ -2,14 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class HeavyAI : MonoBehaviour
 {
-    [SerializeField]
-    private Enemy enemyScript;
+    [SerializeField] Enemy enemyScript;
+    [SerializeField] float speedMultiplier;
 
     Vector2 currentTower, attack;
     GameObject tryTowerObj;
@@ -36,7 +34,7 @@ public class HeavyAI : MonoBehaviour
         }
         else
         {
-            tryTowerObj = enemyScript.FindNextTower();
+            tryTowerObj = enemyScript.FindNextTower(transform.position);
             if (tryTowerObj != null) // If the tower was found, set the enemy into attacking mode
             {
                 currentTower = tryTowerObj.transform.position;
@@ -53,9 +51,6 @@ public class HeavyAI : MonoBehaviour
     {
         float randNum = UnityEngine.Random.Range(1.5f, 3.0f);
         attack = new(randNum, randNum);
-
-        //if (UnityEngine.Random.Range(0,4) == 0) attack = attack.Perpendicular1();
-        //else attack = -attack;
     }
 
     private void Attack()
@@ -67,7 +62,7 @@ public class HeavyAI : MonoBehaviour
         }
         else
         {
-            enemyScript.MoveTowardsLocation(currentTower + attack);
+            enemyScript.MoveTowardsLocation(currentTower + attack, enemyScript.GetSpeed() * speedMultiplier);
         }
     }
 

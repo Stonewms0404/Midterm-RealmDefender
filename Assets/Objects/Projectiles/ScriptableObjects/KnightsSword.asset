@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: KnightsSword
   m_EditorClassIdentifier: 
   projType: 3
+  specialEffect: 3
   useAmount: 100
-  speed: 5
-  lifetime: 1
-  sightRange: 0
+  speed: 13.3
+  lifetime: 0.88
+  sightRange: 5
   particles: {fileID: 0}
+  SFX: {fileID: 1643141875361173477, guid: 0bd170ff2a93a204a9d8d44e01bdfa56, type: 3}

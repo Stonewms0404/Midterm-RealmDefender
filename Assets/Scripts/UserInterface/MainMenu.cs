@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainMenuUIobj, startMenuUIobj, creditsMenuUIobj, instructionsMenuUIobj;
+    private GameObject mainMenuUIobj, startMenuUIobj, creditsMenuUIobj, instructionsMenuUIobj, logoObj;
 
     private LevelLoader levelLoader;
     private SettingsManager settingsManager;
@@ -27,6 +27,7 @@ public class MainMenu : MonoBehaviour
     public void ChangeMenuToMainMenu()
     {
         mainMenuUIobj.SetActive(true);
+        logoObj.SetActive(true);
         startMenuUIobj.SetActive(false);
         creditsMenuUIobj.SetActive(false);
         instructionsMenuUIobj.SetActive(false);
@@ -35,6 +36,7 @@ public class MainMenu : MonoBehaviour
     public void ChangeMenutoStartMenu()
     {
         mainMenuUIobj.SetActive(false);
+        logoObj.SetActive(false);
         startMenuUIobj.SetActive(true);
         creditsMenuUIobj.SetActive(false);
         instructionsMenuUIobj.SetActive(false);
@@ -43,6 +45,7 @@ public class MainMenu : MonoBehaviour
     public void ChangeMenuToCredits()
     {
         mainMenuUIobj.SetActive(false);
+        logoObj.SetActive(false);
         startMenuUIobj.SetActive(false);
         creditsMenuUIobj.SetActive(true);
         instructionsMenuUIobj.SetActive(false);
@@ -51,6 +54,7 @@ public class MainMenu : MonoBehaviour
     public void ChangeMenuToInstructions()
     {
         mainMenuUIobj.SetActive(false);
+        logoObj.SetActive(false);
         startMenuUIobj.SetActive(false);
         creditsMenuUIobj.SetActive(false);
         instructionsMenuUIobj.SetActive(true);
@@ -60,18 +64,4 @@ public class MainMenu : MonoBehaviour
     {
         levelLoader.QuitApp();
     }
-
-    public void ToggleMusic()
-    {
-        settingsManager.ToggleMusic();
-    }
-    public void ToggleSFX()
-    {
-        settingsManager.ToggleSFX();
-    }
-    public void ToggleParticles()
-    {
-        settingsManager.ToggleParticles();
-    }
-        
 }

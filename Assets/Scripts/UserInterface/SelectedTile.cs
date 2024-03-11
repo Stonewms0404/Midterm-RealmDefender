@@ -12,19 +12,23 @@ public class SelectedTile : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Vector3 offset;
     [SerializeField] private NextWaveButton waveButton;
-    [SerializeField] private bool isShopOpen, canOpenShop = true, isNextButtonHovered;
+    [SerializeField] private bool isShopOpen, towerMenuOpen;
 
-    private void OnEnable()
+    private void Awake()
     {
         SpawnTowerUI._ShopOpen += SetIsShopOpen;
-        TowerSelectedUI._TowerMenuOpen += SetCanOpenShop;
-        WavesManager._WaveStarted += SetCanOpenShop;
-        Cover.Hovered += SetCanOpenShop;
+        TowerSelectedUI._TowerMenuOpen += SetTowerMenuOpen;
     }
 
-    private void SetCanOpenShop(bool value)
+    private void OnDestroy()
     {
-        canOpenShop = value;
+        SpawnTowerUI._ShopOpen -= SetIsShopOpen;
+        TowerSelectedUI._TowerMenuOpen -= SetTowerMenuOpen;
+    }
+
+    private void SetTowerMenuOpen(bool value)
+    {
+        towerMenuOpen = value;
         isShopOpen = false;
         _DisplayShop("Hide", transform);
     }
@@ -32,7 +36,7 @@ public class SelectedTile : MonoBehaviour
     private void Update()
     {
         DisplayShopAtLocation();
-        if (!isShopOpen && canOpenShop)
+        if (!isShopOpen && !towerMenuOpen)
         {
             Vector3 mouse = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             mouse.z = 0;
@@ -42,7 +46,7 @@ public class SelectedTile : MonoBehaviour
 
     private void DisplayShopAtLocation()
     {
-        if (Input.GetMouseButtonDown(0) && !isShopOpen && canOpenShop && !waveButton.hovered)
+        if (Input.GetMouseButtonDown(0) && !isShopOpen && !towerMenuOpen && !waveButton.hovered)
         {
             _DisplayShop("Show", transform);
         }

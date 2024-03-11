@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: SprintScriptableObject
   m_EditorClassIdentifier: 
   EnemyName: Sprint
-  health: 80
+  health: 20
   attack: 5
   speed: 8
-  moneyReward: 10
+  moneyReward: 15
   canCollideWithTowers: 1
   enemyType: 0
-  deathParticles: {fileID: 2449368243447855634, guid: 6af0561912c58a945bda8f755bc785df, type: 3}
+  deathParticles: {fileID: 2766451387875211726, guid: 2019126c3780f43498fc8786838575be, type: 3}
+  healParticels: {fileID: 455134691599124975, guid: 0a3aa444090a8824cb9e740d7ce15fa6, type: 3}
+  poisonParticles: {fileID: 642739364627257773, guid: 75732b682d62d654a9766560f624335d, type: 3}

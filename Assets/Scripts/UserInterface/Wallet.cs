@@ -16,14 +16,24 @@ public class Wallet : MonoBehaviour
 
     private int wallet;
 
-    private void Start()
+    private void Awake()
     {
         SpawnTowerUI._Transaction += Transation;
         TowerSelectedUI._SellTower += AddToWallet;
         Enemy.RewardMoney += AddToWallet;
         WavesManager._WaveReward += AddToWallet;
+    }
+    private void OnDestroy()
+    {
+        SpawnTowerUI._Transaction -= Transation;
+        TowerSelectedUI._SellTower -= AddToWallet;
+        Enemy.RewardMoney -= AddToWallet;
+        WavesManager._WaveReward -= AddToWallet;
+    }
 
-        AddToWallet(startingAmount);
+    public void SetStartingAmount(int amount)
+    {
+        AddToWallet(amount);
     }
 
     public int GetWallet()

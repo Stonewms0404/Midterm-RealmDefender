@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: ClericProj
   m_EditorClassIdentifier: 
   projType: 0
+  specialEffect: 1
   useAmount: 20
   speed: 20
   lifetime: 5
   sightRange: 15
   particles: {fileID: 0}
+  SFX: {fileID: 8767882902708707656, guid: c1ba3380fe699ab479746d2c809d4deb, type: 3}

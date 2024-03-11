@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   towerType: 2
-  costOfTower: 300
-  health: 50
-  useSpeed: 1
-  sightRange: 15
+  costOfTower: 250
+  health: 100
+  useSpeed: 1.5
+  sightRange: 25
   deathParticles: {fileID: 8985519470620673580, guid: b675c9b4977d1a246a9e6025aab7f0cb, type: 3}
+  healParticels: {fileID: 455134691599124975, guid: 0a3aa444090a8824cb9e740d7ce15fa6, type: 3}
   projectile:
   - {fileID: 5810383814765082423, guid: fb907b4c9c05c1848b6cdb101a3dd9ac, type: 3}

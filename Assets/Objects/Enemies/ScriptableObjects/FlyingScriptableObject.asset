@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: FlyingScriptableObject
   m_EditorClassIdentifier: 
   EnemyName: Flying
-  health: 70
-  attack: 10
-  speed: 6
-  moneyReward: 10
+  health: 60
+  attack: 20
+  speed: 15
+  moneyReward: 30
   canCollideWithTowers: 0
   enemyType: 2
   deathParticles: {fileID: 1207696547463116773, guid: ae56d3b47c136d941b187c63f31a51a1, type: 3}
+  healParticels: {fileID: 455134691599124975, guid: 0a3aa444090a8824cb9e740d7ce15fa6, type: 3}
+  poisonParticles: {fileID: 642739364627257773, guid: 75732b682d62d654a9766560f624335d, type: 3}

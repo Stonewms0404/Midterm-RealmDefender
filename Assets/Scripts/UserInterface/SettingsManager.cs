@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
 {
-    public static event Action<bool, bool, bool> AdjustSettings;
-    [SerializeField]
-    private SettingsScriptableObject settingsSO;
+    [SerializeField] SettingsScriptableObject settingsSO;
 
-    private SettingsManager instance;
+    private static SettingsManager instance;
 
     private void Awake()
     {
@@ -24,11 +22,6 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        gameObject.SetActive(true);
-    }
-
     public int GetSceneIndex()
     {
         return settingsSO.sceneIndex;
@@ -36,24 +29,6 @@ public class SettingsManager : MonoBehaviour
     public void SetSceneIndex(int value)
     {
         settingsSO.sceneIndex = value;
-    }
-
-    public void ToggleMusic()
-    {
-        settingsSO.music = !settingsSO.music;
-        AdjustSettings(settingsSO.music, settingsSO.sfx, settingsSO.particles);
-    }
-
-    public void ToggleSFX()
-    {
-        settingsSO.sfx = !settingsSO.sfx;
-        AdjustSettings(settingsSO.music, settingsSO.sfx, settingsSO.particles);
-    }
-
-    public void ToggleParticles()
-    {
-        settingsSO.particles = !settingsSO.particles;
-        AdjustSettings(settingsSO.music, settingsSO.sfx, settingsSO.particles);
     }
 
     public bool GetMusic()

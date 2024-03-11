@@ -9,9 +9,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float waveMultiplier;
 
-    private void OnEnable()
+    private void Awake()
     {
         WavesManager.SpawnEnemyAtSpawner += SpawnEnemy;
+    }
+    private void OnDestroy()
+    {
+        WavesManager.SpawnEnemyAtSpawner -= SpawnEnemy;
     }
 
     private void SpawnEnemy(int numOfSpawner, GameObject enemy, Transform enemyFolder)

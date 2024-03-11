@@ -18,4 +18,6 @@ public class EnemyScriptableObject : ScriptableObject
     public bool canCollideWithTowers;
     public EnemyType enemyType;
     public GameObject deathParticles;
+    public GameObject healParticels;
+    public GameObject poisonParticles;
 }

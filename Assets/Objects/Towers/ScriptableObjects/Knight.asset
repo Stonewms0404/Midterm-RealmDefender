@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: 1
   costOfTower: 200
-  health: 70
-  useSpeed: 3
-  sightRange: 0
-  deathParticles: {fileID: 6754737692759837850, guid: 29ff99f59e4e5dd4ea33c75fde449cab, type: 3}
+  health: 150
+  useSpeed: 1
+  sightRange: 4.5
+  deathParticles: {fileID: 8760233000761127867, guid: d75ef8208d833cf429588409bc0c74d0, type: 3}
+  healParticels: {fileID: 455134691599124975, guid: 0a3aa444090a8824cb9e740d7ce15fa6, type: 3}
   projectile:
   - {fileID: 7805075688963166264, guid: aef9f21de9c283a429a0694e3883a808, type: 3}

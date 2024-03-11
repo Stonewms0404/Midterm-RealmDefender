@@ -13,37 +13,56 @@ public class SpawnTowerUI : MonoBehaviour
     public static event Action<GameObject, Transform> _PlaceTower;
     public static event Action<bool> _ShopOpen;
 
-    [SerializeField]
-    private PauseMenu pauseMenu;
-    [SerializeField]
-    private Canvas canvas;
-    [SerializeField]
-    private GameObject spawnTowerUI, spawnPosition;
-    [SerializeField]
-    private UnityEngine.UI.Button[] towerButtons;
-    [SerializeField]
-    private Camera mainCamera;
-    [SerializeField]
-    private Wallet wallet;
+    [Header ("Interfaces")]
+    [SerializeField] Wallet wallet;
+    [SerializeField] GameObject[] menuObj;
+    [SerializeField] UnityEngine.UI.Button[] towerButtons;
 
-    [SerializeField] private bool canShow = true;
-    [SerializeField] private Vector3 offset, bounds, boundsAdjusted;
+    [Space]
+    [Header ("Objects")]
+    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject spawnTowerUI, canvasObj, circleObj;
+    [SerializeField] Camera mainCamera;
 
-    private void Start()
+    [Space]
+    [Header("Variables")]
+    [SerializeField] Vector3 offset;
+    [SerializeField] Vector3 bounds, boundsAdjusted;
+    [SerializeField] bool towerMenuOpen, isOpen, menusOpen;
+
+    private void Awake()
     {
         SelectedTile._DisplayShop += DisplayShop;
+        TowerSelectedUI._TowerMenuOpen += SetCanShow;
         Tower._BuyTower += BuyTower;
         ToggleShop(false);
     }
 
+    private void OnDestroy()
+    {
+        SelectedTile._DisplayShop -= DisplayShop;
+        TowerSelectedUI._TowerMenuOpen -= SetCanShow;
+        Tower._BuyTower -= BuyTower;
+    }
+    private void SetMenuOpen()
+    {
+        for (int i = 0; i < menuObj.Length; i++)
+        {
+            menusOpen = menuObj[i].activeSelf;
+            if (menusOpen)
+                return;
+        }
+    }
+
     private void Update()
     {
+        SetMenuOpen();
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (pauseMenu.isPaused)
+        if (menusOpen)
         {
             ToggleShop(false);
         }
-        else if (gameObject.activeSelf && !pauseMenu.isPaused)
+        else if (gameObject.activeSelf && !menusOpen)
         {
             Vector2 dist = new(GetAbsDistance(transform.position.x, mousePos.x), GetAbsDistance(transform.position.y, mousePos.y));
             SetCanvasSize();
@@ -54,9 +73,14 @@ public class SpawnTowerUI : MonoBehaviour
         }
     }
 
+    private void SetCanShow(bool value)
+    {
+        towerMenuOpen = value;
+    }
+
     public void DisplayShop(string input, Transform trans)
     {
-        if (input == "Show" && canShow && !pauseMenu.isPaused)
+        if (input == "Show" && !towerMenuOpen && !menusOpen)
         {
             spawnTowerUI.transform.position = trans.position + offset;
             SetCanvasSize();
@@ -78,7 +102,9 @@ public class SpawnTowerUI : MonoBehaviour
 
     private void ToggleShop(bool value)
     {
-        spawnTowerUI.SetActive(value);
+        isOpen = value;
+        canvasObj.SetActive(value);
+        circleObj.SetActive(value);
         _ShopOpen(value);
     }
 
@@ -105,7 +131,7 @@ public class SpawnTowerUI : MonoBehaviour
         if (costOfTower <= wallet.GetWallet())
         {
             _Transaction(costOfTower);
-            _PlaceTower(towerObject, spawnPosition.transform);
+            _PlaceTower(towerObject, circleObj.transform);
             ToggleShop(false);
         }
     }
@@ -113,6 +139,11 @@ public class SpawnTowerUI : MonoBehaviour
     private void OnMouseEnter()
     {
         _ShopOpen(true);
+    }
+
+    public bool GetIsOpen()
+    {
+        return isOpen;
     }
 
     private float GetAbsDistance(Vector2 to)

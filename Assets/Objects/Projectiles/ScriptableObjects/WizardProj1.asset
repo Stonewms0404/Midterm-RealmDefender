@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: WizardProj1
   m_EditorClassIdentifier: 
   projType: 3
-  useAmount: 50
-  speed: 30
+  specialEffect: 2
+  useAmount: 15
+  speed: 50
   lifetime: 5
   sightRange: 20
   particles: {fileID: 0}
+  SFX: {fileID: 6697140408609385940, guid: e73e4c0c2b83c2545ab44cc30561e971, type: 3}

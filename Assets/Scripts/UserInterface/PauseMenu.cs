@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject pauseMenuUI;
+    [SerializeField]
+    private int sceneIndex;
 
     private SettingsManager settingsManager;
     private LevelLoader levelLoader;
@@ -19,7 +21,8 @@ public class PauseMenu : MonoBehaviour
     {
         settingsManager = GameObject.FindGameObjectWithTag("SettingsManager").GetComponent<SettingsManager>();
         levelLoader = GameObject.FindGameObjectWithTag("LevelLoader").GetComponent<LevelLoader>();
-        pauseMenuUI.SetActive(false);
+        settingsManager.SetSceneIndex(sceneIndex);
+        Resume();
     }
 
     private void Update()
